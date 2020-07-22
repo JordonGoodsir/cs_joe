@@ -1,0 +1,23 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Username:</strong>
+  <%= @profile.username %>
+</p>
+
+<p>
+  <strong>Number:</strong>
+  <%= @profile.number %>
+</p> 
+
+<% if @profile.picture.attached? %>
+<%= image_tag @profile.picture %> 
+<%end %>
+
+<p>
+  <strong>Wallet:</strong>
+  <%= @profile.wallet %>
+</p>
+
+<%= link_to 'Edit', edit_profile_path(@profile) %> |
+<%= link_to 'Back', root_path %>
