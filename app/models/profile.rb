@@ -9,9 +9,20 @@ class Profile < ApplicationRecord
 validates :username, uniqueness: true 
 
 
-validates :correct_document_type, presence: true
+validates :correct_document_type, presence: true 
 
-private
+validates :clean_name, presence: true 
+
+private 
+
+def clean_name  
+  if Saintly.sanitize(username).split("").include?("*")  
+    errors.add(:username, 'Appropriate PLEASE!')  
+    return false 
+  else 
+    return true 
+  end
+end 
 
 def correct_document_type 
   if picture.attached? and !picture.content_type.in?(%w(image/png image/jpeg))
