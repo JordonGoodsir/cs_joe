@@ -7,16 +7,15 @@ class ProfilesController < ApplicationController
     begin
     if Profile.find_by(user_id: current_user.id) == nil 
       redirect_to new_profile_path
-    end
+    end 
   rescue 
   end
-     
   end
 
   # GET /profiles/1
   # GET /profiles/1.json
   def show  
-
+  @current_user = current_user.id
   end
 
   # GET /profiles/new
@@ -48,9 +47,6 @@ class ProfilesController < ApplicationController
   # PATCH/PUT /profiles/1
   # PATCH/PUT /profiles/1.json
   def update  
-    p "++++++++++++++"
-    p params 
-    p "++++++++++++++"
     respond_to do |format|
       if @profile.update(profile_params)
         format.html { redirect_to @profile, notice: 'Profile was successfully updated.' }

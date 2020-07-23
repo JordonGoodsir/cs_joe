@@ -8,7 +8,6 @@ class Profile < ApplicationRecord
 
 validates :username, uniqueness: true 
 
-
 validates :correct_document_type, presence: true 
 
 validates :clean_name, presence: true 
