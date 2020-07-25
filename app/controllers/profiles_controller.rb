@@ -1,8 +1,7 @@
 class ProfilesController < ApplicationController
   before_action :set_profile, only: [:show, :edit, :update, :destroy]  
   before_action :only_user, only: [:show, :edit] 
-  before_action :profile_check, only: [:home, :edit] 
-
+  before_action :profile_check
   def home   
     begin
     if Profile.find_by(user_id: current_user.id) == nil 
@@ -85,9 +84,12 @@ class ProfilesController < ApplicationController
     end 
 
     def profile_check  
+      begin 
       if current_user
         @current_profile = Profile.find_by(user_id: current_user).id 
-      end
+      end 
+    rescue 
+    end
     end 
 
     # Only allow a list of trusted parameters through.

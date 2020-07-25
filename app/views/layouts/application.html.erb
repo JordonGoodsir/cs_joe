@@ -9,7 +9,10 @@
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <body> 
+  <body>  
+  <% if params[:controller] == ("profiles" or "items" or "listings")%>  
+  <%= render "partials/nav_bar"%>
+  <% end%>
     <%= yield %>
   </body>
 </html>

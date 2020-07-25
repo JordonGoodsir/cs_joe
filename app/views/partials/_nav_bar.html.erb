@@ -15,11 +15,8 @@
         <a class="nav-link" href="#">Market</a>
       </li>
       <li class="nav-item"> 
-            <% begin%>
-            <a class="nav-link" href=<%= profile_path(current_user) %>>Dashboard</a>  
-            <% rescue%> 
-            <% end%>
-      </li>
+            <a class="nav-link" href=<%= profile_path(@current_profile) %>>Dashboard</a>  
+      </li> 
     </ul>
   </div>
 </nav>

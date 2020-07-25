@@ -16,8 +16,11 @@
 
 <p>
   <strong>Wallet:</strong>
-  <%= @profile.wallet %>
+  $<%= @profile.wallet %>
 </p>
 
 <%= link_to 'Edit', edit_profile_path(@profile) %> |
-<%= link_to 'Back', root_path %>
+<%= link_to 'Back', root_path %> | 
+<%= link_to 'Inventory', items_path %> 
+
+
