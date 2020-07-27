@@ -85,7 +85,6 @@ end
 
 #  delete value if its lower than found index  
 amount = 0  
-holder = [] 
 cleaner = ["AK-47 | Aquamarine Revenge (thing)","AK-47 | Aquamarine Revenge (thing)","AK-47 | Aquamarine Revenge (thing)"]  
 loop do   
 
@@ -93,23 +92,19 @@ if amount == cleaner.length
    break 
 end
  
-cleaner[amount].split("").each_with_index do |v,i| 
+cleaner[amount].split("").map.with_index do |v,i| 
     if v == "|" 
       @pipe = i + 1  
-      cleaner[amount].split("").delete_if.with_index { |v,i| i <= @pipe}  
     elsif  v == "(" 
       @bracket = i - 1  
-      cleaner[amount].split("").delete_if.with_index { |v,i| i >= @bracket}  
     end 
 end  
 
-
-p cleaner[amount].split("").each { |x| x == " " ? '%20' : x } 
+p cleaner[amount].split("").delete_if.with_index { |v,i| i >= @bracket or i <= @pipe}.map { |x| x == " " ? '%20' : x }.join 
 amount += 1 
 
 
-end
-
+end 
 
 
  
