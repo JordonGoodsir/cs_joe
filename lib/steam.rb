@@ -35,14 +35,15 @@ end
 
 items = { 
     hello: { 
-    word: "hello"
+    "word": "hello", 
+    "words": "hello"
     }, 
     goodbye: { 
     word: "goodbye"
     }
 } 
 
-# p items.keys
+p items[:hello].keys.each {|v| p v.to_s}
 
 require 'httparty'
 class Backpack  
@@ -59,24 +60,24 @@ class Backpack
     def skins   
             response = self.class.get("/api/GetItemsList/v2/")
             response_data = JSON.parse(response.body) 
-            cleaner = response_data[:items_list].keys.to_s.split("") 
-            
-            cleaner.map.with_index do |v,i| 
+            cleaner = response_data[:items_list].keys.to_s  
+            amount = 0 
+            loop do 
+            if amount == cleaner.length  
+                break 
+             end
+            cleaner.split("").map.with_index do |v,i| 
                 if v == "|" 
                   @pipe = i + 1  
-                  cleaner.delete_if.with_index { |v,i| i <= @pipe}  
                 elsif  v == "(" 
                   @bracket = i - 1  
-                  cleaner.delete_if.with_index { |v,i| i >= @bracket}  
                 end
-               
             end  
-            Skin.create(name: cleaner.map { |x| x == " " ? '%20' : x }.join)
-
+            Skin.create(name: cleaner[amount].split("").delete_if.with_index { |v,i| i >= @bracket or i <= @pipe}.map { |x| x == " " ? '%20' : x }.join  
+            amount += 1 
+            end
+        end   
     end   
-
-  
-end   
 
 @mini_database = Backpack.new  
 # @mini_database.skins
@@ -84,30 +85,31 @@ end
 
 
 #  delete value if its lower than found index  
-amount = 0  
-cleaner = ["AK-47 | Aquamarine Revenge (thing)","AK-47 | Aquamarine Revenge (thing)","AK-47 | Aquamarine Revenge (thing)"]  
-loop do   
+# holder = [] 
+# amount = 0  
+# cleaner = ["AK-47 | Aquamarine Revenge (thing)","AK-47 | Aquamarine Revenge (thing)","AK-47 | Aquamarine Revenge (thing)"]  
+# loop do   
 
-if amount == cleaner.length  
-   break 
-end
+# if amount == cleaner.length  
+#    break 
+# end
  
-cleaner[amount].split("").map.with_index do |v,i| 
-    if v == "|" 
-      @pipe = i + 1  
-    elsif  v == "(" 
-      @bracket = i - 1  
-    end 
-end  
+# cleaner[amount].split("").map.with_index do |v,i| 
+#     if v == "|" 
+#       @pipe = i + 1  
+#     elsif  v == "(" 
+#       @bracket = i - 1  
+#     end 
+# end  
 
-p cleaner[amount].split("").delete_if.with_index { |v,i| i >= @bracket or i <= @pipe}.map { |x| x == " " ? '%20' : x }.join 
-amount += 1 
-
-
-end 
+# holder.push(cleaner[amount].split("").delete_if.with_index { |v,i| i >= @bracket or i <= @pipe}.map { |x| x == " " ? '%20' : x }.join) 
+# amount += 1 
 
 
- 
+# end 
+
+
+#  p holder
 
 
 
