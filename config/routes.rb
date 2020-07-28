@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
-  resources :items 
+  resources :items, only: [:show, :destroy, :create]
+  get ":id/inventory", to: "items#index", as: "inventory"
+  
 
   resources :listings 
 

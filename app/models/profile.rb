@@ -10,9 +10,21 @@ validates :username, uniqueness: true
 
 validates :correct_document_type, presence: true 
 
-validates :clean_name, presence: true 
+validates :clean_name, presence: true  
 
-private 
+validates :not_blank, presence: true
+
+private   
+
+def not_blank 
+  if username.blank?  
+    errors.add(:username, 'Cant Be Blank!')  
+    return false 
+  else 
+    return true
+  end
+
+end
 
 def clean_name  
   if Saintly.sanitize(username).split("").include?("*")  

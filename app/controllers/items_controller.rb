@@ -20,8 +20,6 @@ class ItemsController < ApplicationController
     @items = Item.all    
     # if the users inventory is empty then make generate invetory appear 
     # even better if u can see if button has been pressed ever make is dissapear
-    p $the
-    
   end
 
 

@@ -21,7 +21,10 @@ class ProfilesController < ApplicationController
 
   # GET /profiles/new
   def new
-    @profile = Profile.new
+    @profile = Profile.new  
+    p "+++++++++++++++"
+    p params 
+    p "+++++++++++++++"
   end
 
   # GET /profiles/1/edit

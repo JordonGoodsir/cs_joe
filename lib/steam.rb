@@ -1,4 +1,4 @@
-require 'httparty'
+require 'httparty' 
 class Api  
     include HTTParty 
     base_uri "https://steamcommunity.com/market/listings/730" 
@@ -9,9 +9,12 @@ class Api
     end   
     
     def test  
-            response = self.class.get("https://steamcommunity.com/market/listings/730/StatTrak%E2%84%A2%20AK-47%20%7C%20Blue%20Laminate%20%28Factory%20New%29/render?start=0&count=10&currency=3&language=english&format=json")
-            response_data = JSON.parse(response.body) 
-            p response_data.keys
+            response = self.class.get("http://csgobackpack.net/api/GetItemPrice/?currency=USD&id=AK-47%20|%20Wasteland%20Rebel%20(Battle-Scarred)&time=7&icon=1")
+            response_data = JSON.parse(response.body)
+            cleaner = response_data.keys.uniq  
+             
+            p cleaner
+            
     end   
   
 
@@ -33,58 +36,79 @@ end
 @specified_item = Api.new   
 # @specified_item.test 
 
-items = { 
-    hello: { 
-    "word": "hello", 
-    "words": "hello"
-    }, 
-    goodbye: { 
-    word: "goodbye"
-    }
-} 
-
-p items[:hello].keys.each {|v| p v.to_s}
 
 require 'httparty'
 class Backpack  
     include HTTParty 
-    base_uri "http://csgobackpack.net"
-    $all_skins =[]
 
 
     # seed this data into the Skins model 
     # then select random name from tabel 
-    # for random do Skins.length and make an array of that number then sample it
-  
+    # for random do Skins.ids.last and make an array of that number then sample it
+    @@cleaned_names = []
 
-    def skins   
-            response = self.class.get("/api/GetItemsList/v2/")
+    def skins    
+            response = self.class.get("http://csgobackpack.net/api/GetItemsList/v2/")
             response_data = JSON.parse(response.body) 
-            cleaner = response_data[:items_list].keys.to_s  
+            cleaner = response_data["items_list"].keys.uniq
             amount = 0 
             loop do 
             if amount == cleaner.length  
+                @@cleaned_names.uniq.each do |v|  
+                Skin.create(name: v)  
+                end
                 break 
              end
-            cleaner.split("").map.with_index do |v,i| 
+            cleaner[amount].split("").map.with_index do |v,i| 
                 if v == "|" 
                   @pipe = i + 1  
                 elsif  v == "(" 
                   @bracket = i - 1  
                 end
-            end  
-            Skin.create(name: cleaner[amount].split("").delete_if.with_index { |v,i| i >= @bracket or i <= @pipe}.map { |x| x == " " ? '%20' : x }.join  
-            amount += 1 
+            end   
+            begin 
+               if cleaner[amount].split("").delete_if.with_index { |v,i| i >= @bracket or i <= @pipe}.map { |x| x == " " ? '%20' : x }.join.blank? == false 
+                @@cleaned_names.push(cleaner[amount].split("").delete_if.with_index { |v,i| i >= @bracket or i <= @pipe}.map { |x| x == " " ? '%20' : x }.join)
+               end
+            rescue 
             end
-        end   
+            amount += 1
+            end
+        end    
+
+        def single?  
+            response = self.class.get("http://csgobackpack.net/api/GetItemsList/v2/")
+            response_data = JSON.parse(response.body) 
+            cleaner = response_data["items_list"].keys.uniq 
+            p cleaner
+        end
     end   
 
 @mini_database = Backpack.new  
-# @mini_database.skins
+# @mini_database.skins   
 
 
 
-#  delete value if its lower than found index  
+# -----------KEYS TEST-----------
+
+# strings = []
+# items = { 
+#     hello: { 
+#     "word": "hello", 
+#     "words": "hello"
+#     }, 
+#     goodbye: { 
+#     word: "goodbye"
+#     }
+# } 
+
+# strings.push(items[:hello].keys.map {|v| v.to_s})   
+# p strings.flatten! 
+
+
+
+# -----------ITEMS TEST-----------
+
 # holder = [] 
 # amount = 0  
 # cleaner = ["AK-47 | Aquamarine Revenge (thing)","AK-47 | Aquamarine Revenge (thing)","AK-47 | Aquamarine Revenge (thing)"]  
@@ -117,11 +141,3 @@ class Backpack
 # 2. get "items_list" object/hash from response
 # 3. loop through every key in that object/hash to get individual item details
 # 4. get the name property from the individual item details
-
-# need key from item list
-
-
-# "get all names and make array of them"
-
-# ideal out come
-# items_list.random
