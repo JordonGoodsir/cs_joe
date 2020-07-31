@@ -1,25 +1,27 @@
 class ItemsController < ApplicationController
-  before_action :set_item, only: [:show, :edit, :update, :destroy] 
+  before_action :set_item, only: [:show, :edit, :update, :destroy]  
+  before_action :profile_check
 
   # https://steamcommunity.com/market/listings/730/AWP %7C Hyper Beast %28Field-Tested%29
   
-  def api  
-    include HTTParty
-    base_uri 'https://steamcommunity.com/market/listings/730' 
-    def posts  
-      self.class.get('/AWP%20%7C%20Hyper%20Beast%20%28Field-Tested%29/render?start=0&count=10&currency=3&language=english&format=json')
-    end 
-    @hello = Api.new  
-
-  end
-
+ 
   # GET /items
   # GET /items.json
   def index   
-    require 'steam.rb'
-    @items = Item.all    
-    # if the users inventory is empty then make generate invetory appear 
-    # even better if u can see if button has been pressed ever make is dissapear
+    
+  # @generate = Item.create(profile_id:@current_profile, skin_id: [*1..Skin.ids.last].sample.to_i) 
+  #  for i in 1..20 do
+  #  Item.create(profile_id:@current_profile, skin_id: [*1..Skin.ids.last].sample) 
+  #  end 
+  ids =[] 
+  @current_user_skins=[]
+  ids.push(Item.where(profile_id: @current_profile).ids).flatten! 
+  ids.each do |v| 
+  @current_user_skins.push(Item.find(v).skin_id)
+  end 
+
+  p @current_user_skins
+
   end
 
 
@@ -40,7 +42,10 @@ class ItemsController < ApplicationController
   # POST /items
   # POST /items.json
   def create
-    @item = Item.new(item_params)
+    weapon = %w(P2000 USP-S Glock-18 P250 Five-SeveN Tec-9 CZ75-Auto Dual%20Berettas Desert%20Eagle R8%20Revolver Nova XM1014 MAG-7 Sawed-Off MP9 MAC-10 PP-Bizon MP7 UMP-45 P90 MP5-SD FAMAS Galil AR M4A4 M4A1-S AK-47 AUG SG%20553 SSG%2008 AWP SCAR-20 G3SG1 M249 Negev) 
+    wear = %w(Field-Tested Well-Worn Factory%20New Battle-Scarred Minimal%20Wear)  
+
+    # Item.create(skin_name: )
 
     respond_to do |format|
       if @item.save
@@ -52,7 +57,6 @@ class ItemsController < ApplicationController
       end
     end
   end
-
   # PATCH/PUT /items/1
   # PATCH/PUT /items/1.json
   def update
@@ -86,5 +90,15 @@ class ItemsController < ApplicationController
     # Only allow a list of trusted parameters through.
     def item_params
       params.require(:item).permit(:skin_name, :market_price, :profile_id, :listing_id, :rarity, :stat_track)
+    end 
+
+    
+    def profile_check  
+      begin 
+      if current_user
+        @current_profile = Profile.find_by(user_id: current_user).id 
+      end 
+    rescue 
     end
+    end 
 end

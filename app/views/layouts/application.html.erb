@@ -10,11 +10,12 @@
   </head>
 
   <body>  
-  <% if params[:controller] == ("profiles" or "items" or "listings" or params[:action] != "new")%>  
-  <%= render "partials/nav_bar"%> 
+  <% if params[:controller] == (("profiles" or "items" or "listings") and (params[:action] != "new"))%>  
+  <%= render "partials/nav_bar"%>  
   <% else %> 
   <%= render "partials/nav_bar_login"%>
-  <% end%>
-    <%= yield %>
+  <% end%>   
+    <%= yield %> 
+
   </body>
 </html>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_27_061211) do
+ActiveRecord::Schema.define(version: 2020_07_31_014134) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -37,16 +37,14 @@ ActiveRecord::Schema.define(version: 2020_07_27_061211) do
   end
 
   create_table "items", force: :cascade do |t|
-    t.string "skin_name"
-    t.integer "market_price"
     t.bigint "profile_id", null: false
-    t.bigint "listing_id", null: false
-    t.string "rarity"
-    t.boolean "stat_track"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "skin_id"
+    t.bigint "listing_id"
     t.index ["listing_id"], name: "index_items_on_listing_id"
     t.index ["profile_id"], name: "index_items_on_profile_id"
+    t.index ["skin_id"], name: "index_items_on_skin_id"
   end
 
   create_table "listings", force: :cascade do |t|
@@ -55,6 +53,8 @@ ActiveRecord::Schema.define(version: 2020_07_27_061211) do
     t.integer "seller_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "skin_id", null: false
+    t.index ["skin_id"], name: "index_listings_on_skin_id"
   end
 
   create_table "profiles", force: :cascade do |t|
@@ -72,6 +72,14 @@ ActiveRecord::Schema.define(version: 2020_07_27_061211) do
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.text "icon_url"
+    t.float "average_price"
+    t.string "rarity"
+    t.string "rarity_color"
+    t.string "weapon_type"
+    t.string "gun_type"
+    t.string "stat_track"
+    t.string "wear"
   end
 
   create_table "users", force: :cascade do |t|
@@ -89,5 +97,7 @@ ActiveRecord::Schema.define(version: 2020_07_27_061211) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "items", "listings"
   add_foreign_key "items", "profiles"
+  add_foreign_key "items", "skins"
+  add_foreign_key "listings", "skins"
   add_foreign_key "profiles", "users"
 end
