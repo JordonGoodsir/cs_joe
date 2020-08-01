@@ -14,14 +14,24 @@ class ItemsController < ApplicationController
   #  Item.create(profile_id:@current_profile, skin_id: [*1..Skin.ids.last].sample) 
   #  end 
   ids =[] 
-  @current_user_skins=[]
+  @current_user_skins=[] 
+
   ids.push(Item.where(profile_id: @current_profile).ids).flatten! 
+  
   ids.each do |v| 
-  @current_user_skins.push(Item.find(v).skin_id)
+  @current_user_skins.push(Item.find(v).skin_id) 
   end 
 
-  p @current_user_skins
 
+  end 
+
+  def generate  
+    current = Profile.find(@current_profile) 
+    current.generated = true
+    for i in 1..20  
+    Item.create(profile_id: @current_profile, skin_id: [*1..Skin.ids.last].sample) 
+    end 
+    redirect_to inventory_path(@current_profile)
   end
 
 

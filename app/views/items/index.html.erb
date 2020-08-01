@@ -1,6 +1,9 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Items</h1>
+<h1>Items</h1> 
+
+<%= link_to "Generate Inventory", generate_path, method: "post"%>
+
 
 <% @current_user_skins.each do |v|%> 
 <ul>

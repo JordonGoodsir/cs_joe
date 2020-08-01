@@ -26,30 +26,30 @@ class Backpack
                     rescue 
                         price = "unknown"
                     end 
-                    p price   
+                  
 
-                #     begin
-                #     opening = v.split("").index("(")
-                #     wear = v.split("").delete_if.with_index { |v,i| i <= opening or v == ")"}.join  
-                #     rescue  
-                #         wear = "unknown"
-                #     end  
+                    begin
+                    opening = v.split("").index("(")
+                    wear = v.split("").delete_if.with_index { |v,i| i <= opening or v == ")"}.join  
+                    rescue  
+                        wear = "unknown"
+                    end  
 
-                #     if cleaner[v].include?("stattrack") and cleaner[v].include?("knife_type")
-                #         # create skin as stattrack and inset knife type into gun_type  
-                #         Skin.create(wear: wear, icon_url: cleaner[v]["icon_url"] , average_price: price , rarity: cleaner[v]["rarity"] , rarity_color: cleaner[v]["rarity_color"] , name: v, weapon_type: cleaner[v]["weapon_type"] ,gun_type: cleaner[v]["knife_type"] , stat_track: "StaTrack")   
-                #         # Skin.create(icon_url: cleaner[v]["icon_url"] , rarity: cleaner[v]["rarity"] , rarity_color: cleaner[v]["rarity_color"] , name: v,gun_type: cleaner[v]["knife_type"] , stat_track: "StaTrack")  
-                #     elsif cleaner[v].include?("knife_type") 
-                #         # create knife as normal, by inseting knife type into gun_type   
-                #         Skin.create(wear: wear, icon_url: cleaner[v]["icon_url"] , average_price: price , rarity: cleaner[v]["rarity"] , rarity_color: cleaner[v]["rarity_color"] , name: cleaner[v]["name"], weapon_type: cleaner[v]["weapon_type"] ,gun_type: cleaner[v]["knife_type"] , stat_track: "no") 
+                    if cleaner[v].include?("stattrack") and cleaner[v].include?("knife_type")
+                        # create skin as stattrack and inset knife type into gun_type  
+                        Skin.create(wear: wear, icon_url: cleaner[v]["icon_url"] , average_price: price , rarity: cleaner[v]["rarity"] , rarity_color: cleaner[v]["rarity_color"] , name: v, weapon_type: cleaner[v]["weapon_type"] ,gun_type: cleaner[v]["knife_type"] , stat_track: "StaTrack")   
+                        # Skin.create(icon_url: cleaner[v]["icon_url"] , rarity: cleaner[v]["rarity"] , rarity_color: cleaner[v]["rarity_color"] , name: v,gun_type: cleaner[v]["knife_type"] , stat_track: "StaTrack")  
+                    elsif cleaner[v].include?("knife_type") 
+                        # create knife as normal, by inseting knife type into gun_type   
+                        Skin.create(wear: wear, icon_url: cleaner[v]["icon_url"] , average_price: price , rarity: cleaner[v]["rarity"] , rarity_color: cleaner[v]["rarity_color"] , name: cleaner[v]["name"], weapon_type: cleaner[v]["weapon_type"] ,gun_type: cleaner[v]["knife_type"] , stat_track: "no") 
                     
-                #     elsif cleaner[v].include?("stattrack")
-                #         # create skin as non statrack as usual   
-                #         Skin.create(wear:cleaner[v]["exterior"], icon_url: cleaner[v]["icon_url"] , average_price: price , rarity: cleaner[v]["rarity"] , rarity_color: cleaner[v]["rarity_color"] , name: cleaner[v]["name"], weapon_type: cleaner[v]["weapon_type"] ,gun_type: cleaner[v]["gun_type"] , stat_track: "StaTrack")
-                #     else  
-                #         # create normal weapon 
-                #         Skin.create(wear:cleaner[v]["exterior"], icon_url: cleaner[v]["icon_url"] , average_price: price , rarity: cleaner[v]["rarity"] , rarity_color: cleaner[v]["rarity_color"] , name: cleaner[v]["name"], weapon_type: cleaner[v]["weapon_type"] ,gun_type: cleaner[v]["gun_type"] , stat_track: "no")
-                #     end 
+                    elsif cleaner[v].include?("stattrack")
+                        # create skin as non statrack as usual   
+                        Skin.create(wear:cleaner[v]["exterior"], icon_url: cleaner[v]["icon_url"] , average_price: price , rarity: cleaner[v]["rarity"] , rarity_color: cleaner[v]["rarity_color"] , name: cleaner[v]["name"], weapon_type: cleaner[v]["weapon_type"] ,gun_type: cleaner[v]["gun_type"] , stat_track: "StaTrack")
+                    else  
+                        # create normal weapon 
+                        Skin.create(wear:cleaner[v]["exterior"], icon_url: cleaner[v]["icon_url"] , average_price: price , rarity: cleaner[v]["rarity"] , rarity_color: cleaner[v]["rarity_color"] , name: cleaner[v]["name"], weapon_type: cleaner[v]["weapon_type"] ,gun_type: cleaner[v]["gun_type"] , stat_track: "no")
+                    end 
             
                 end   
             end
