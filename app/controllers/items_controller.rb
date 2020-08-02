@@ -19,15 +19,17 @@ class ItemsController < ApplicationController
   ids.push(Item.where(profile_id: @current_profile).ids).flatten! 
   
   ids.each do |v| 
-  @current_user_skins.push(Item.find(v).skin_id) 
-  end 
+  @current_user_skins.push(Item.find(v).skin_id)  
+  end  
+  p params
 
 
   end 
 
   def generate  
     current = Profile.find(@current_profile) 
-    current.generated = true
+    current.generated = true 
+    current.save
     for i in 1..20  
     Item.create(profile_id: @current_profile, skin_id: [*1..Skin.ids.last].sample) 
     end 

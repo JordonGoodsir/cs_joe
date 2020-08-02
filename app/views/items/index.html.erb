@@ -1,16 +1,23 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Items</h1> 
+<h1>Items</h1>  
 
-<%= link_to "Generate Inventory", generate_path, method: "post"%>
+<% if Profile.find_by(user_id: current_user).generated != true %>
 
-
-<% @current_user_skins.each do |v|%> 
-<ul>
-<li>Name:<%=Skin.find(v).name%></li>  
-<li>Wear:<%=Skin.find(v).wear%></li>  
-<%= image_tag "http:\/\/cdn.steamcommunity.com\/economy\/image\/#{Skin.find(v).icon_url}"%>
-<li>Average Price: $<%=Skin.find(v).average_price%></li>  
-<li>Weapon Type: <%= Skin.find(v).weapon_type%></li>  
-</ul>
+<%= link_to "Generate Inventory", generate_path, method: "post"%> 
 <% end%>
+
+<div class="container-fluid">
+  <div class="row row-cols-1 row-cols-sm-2 row-cols-md-5">
+<% @current_user_skins.each do |v|%>  
+<span class="border">
+<div class="row justify-content-around m-3">
+<%=Skin.find(v).name%>  
+<%= image_tag "http:\/\/cdn.steamcommunity.com\/economy\/image\/#{Skin.find(v).icon_url}", class:"img-fluid img-thumbnail item_background"%>
+Average Price: $<%=Skin.find(v).average_price%></li>  
+ 
+</div> 
+</span> 
+<% end%>  
+</div> 
+</div>
