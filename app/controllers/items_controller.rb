@@ -1,6 +1,6 @@
 class ItemsController < ApplicationController
-  before_action :set_item, only: [:show, :edit, :update, :destroy]  
-  before_action :profile_check
+  before_action :set_item, only: [:show, :edit, :update, :destroy] 
+  before_action :profile_check 
 
   # https://steamcommunity.com/market/listings/730/AWP %7C Hyper Beast %28Field-Tested%29
   
@@ -14,7 +14,7 @@ class ItemsController < ApplicationController
   #  Item.create(profile_id:@current_profile, skin_id: [*1..Skin.ids.last].sample) 
   #  end 
   ids =[] 
-  @current_user_skins=[] 
+  @current_user_skins=[]  
 
   ids.push(Item.where(profile_id: @current_profile).ids).flatten! 
   
@@ -26,14 +26,17 @@ class ItemsController < ApplicationController
 
   end 
 
-  def generate  
+  def generate   
+    begin
     current = Profile.find(@current_profile) 
     current.generated = true 
     current.save
     for i in 1..20  
     Item.create(profile_id: @current_profile, skin_id: [*1..Skin.ids.last].sample) 
     end 
-    redirect_to inventory_path(@current_profile)
+    redirect_to inventory_path(@current_profile) 
+    rescue  
+    end
   end
 
 
@@ -102,15 +105,19 @@ class ItemsController < ApplicationController
     # Only allow a list of trusted parameters through.
     def item_params
       params.require(:item).permit(:skin_name, :market_price, :profile_id, :listing_id, :rarity, :stat_track)
-    end 
+    end  
+
+    # def only_user_items  
+    #   if current_user.id != Profile.find(user_id: current_user.id).user_id
+    #     redirect_to root_path
+    #   end
+    # end 
 
     
     def profile_check  
-      begin 
       if current_user
         @current_profile = Profile.find_by(user_id: current_user).id 
-      end 
-    rescue 
+      end  
     end
-    end 
+
 end

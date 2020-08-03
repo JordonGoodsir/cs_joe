@@ -2,7 +2,24 @@ require 'httparty'
 class Backpack  
     include HTTParty  
 
-        @@accepted = [] 
+        @@accepted = []  
+
+            def clean(string) 
+                
+                string.split("").map.with_index do |v,i| 
+                    if v == "|"
+                    @pipe = i  
+                    @pipe_stop = i - 1
+                  elsif  v == "(" 
+                    @bracket = i - 1  
+                  end 
+                end    
+                
+                
+                return string.split("").delete_if.with_index { |v,i| (i <= @pipe and i >= @pipe_stop) or (i >= @bracket)}.join
+               
+            end
+
             def time_saver   
                 response = self.class.get("http://csgobackpack.net/api/GetItemsList/v2/")
                 response_data = JSON.parse(response.body) 
@@ -37,18 +54,18 @@ class Backpack
 
                     if cleaner[v].include?("stattrack") and cleaner[v].include?("knife_type")
                         # create skin as stattrack and inset knife type into gun_type  
-                        Skin.create(wear: wear, icon_url: cleaner[v]["icon_url"] , average_price: price , rarity: cleaner[v]["rarity"] , rarity_color: cleaner[v]["rarity_color"] , name: v, weapon_type: cleaner[v]["weapon_type"] ,gun_type: cleaner[v]["knife_type"] , stat_track: "StaTrack")   
+                        Skin.create(wear: wear, icon_url: cleaner[v]["icon_url"] , average_price: price , rarity: cleaner[v]["rarity"] , rarity_color: cleaner[v]["rarity_color"] , name: clean(v), weapon_type: cleaner[v]["weapon_type"] ,gun_type: cleaner[v]["knife_type"] , stat_track: "StaTrack")   
                         # Skin.create(icon_url: cleaner[v]["icon_url"] , rarity: cleaner[v]["rarity"] , rarity_color: cleaner[v]["rarity_color"] , name: v,gun_type: cleaner[v]["knife_type"] , stat_track: "StaTrack")  
                     elsif cleaner[v].include?("knife_type") 
                         # create knife as normal, by inseting knife type into gun_type   
-                        Skin.create(wear: wear, icon_url: cleaner[v]["icon_url"] , average_price: price , rarity: cleaner[v]["rarity"] , rarity_color: cleaner[v]["rarity_color"] , name: cleaner[v]["name"], weapon_type: cleaner[v]["weapon_type"] ,gun_type: cleaner[v]["knife_type"] , stat_track: "no") 
+                        Skin.create(wear: wear, icon_url: cleaner[v]["icon_url"] , average_price: price , rarity: cleaner[v]["rarity"] , rarity_color: cleaner[v]["rarity_color"] , name: clean(v), weapon_type: cleaner[v]["weapon_type"] ,gun_type: cleaner[v]["knife_type"] , stat_track: "no") 
                     
                     elsif cleaner[v].include?("stattrack")
                         # create skin as non statrack as usual   
-                        Skin.create(wear:cleaner[v]["exterior"], icon_url: cleaner[v]["icon_url"] , average_price: price , rarity: cleaner[v]["rarity"] , rarity_color: cleaner[v]["rarity_color"] , name: cleaner[v]["name"], weapon_type: cleaner[v]["weapon_type"] ,gun_type: cleaner[v]["gun_type"] , stat_track: "StaTrack")
+                        Skin.create(wear:cleaner[v]["exterior"], icon_url: cleaner[v]["icon_url"] , average_price: price , rarity: cleaner[v]["rarity"] , rarity_color: cleaner[v]["rarity_color"] , name: clean(v), weapon_type: cleaner[v]["weapon_type"] ,gun_type: cleaner[v]["gun_type"] , stat_track: "StaTrack")
                     else  
                         # create normal weapon 
-                        Skin.create(wear:cleaner[v]["exterior"], icon_url: cleaner[v]["icon_url"] , average_price: price , rarity: cleaner[v]["rarity"] , rarity_color: cleaner[v]["rarity_color"] , name: cleaner[v]["name"], weapon_type: cleaner[v]["weapon_type"] ,gun_type: cleaner[v]["gun_type"] , stat_track: "no")
+                        Skin.create(wear:cleaner[v]["exterior"], icon_url: cleaner[v]["icon_url"] , average_price: price , rarity: cleaner[v]["rarity"] , rarity_color: cleaner[v]["rarity_color"] , name: clean(v), weapon_type: cleaner[v]["weapon_type"] ,gun_type: cleaner[v]["gun_type"] , stat_track: "no")
                     end 
             
                 end   
@@ -57,7 +74,7 @@ class Backpack
 
 
 @mini_database = Backpack.new   
-@mini_database.time_saver 
+@mini_database.time_saver
 
 # cl
 # more want  
@@ -112,14 +129,10 @@ class Backpack
 # holder = [] 
 # amount = 0  
 # cleaner = ["ak-47 | skin (skin)","AK-47 | Aquamarine Revenge (thing)","AK-47 | Aquamarine Revenge (thing)"]   
-# p cleaner[0]
-# opening = cleaner[0].split("").index("(")
+# # p @cleaner[0]
+# # opening = @cleaner[0].split("").index("(")
 
-# p cleaner[0].split("").delete_if.with_index { |v,i| i <= opening or v == ")"}
-
-
-
-
+# # p @cleaner[0].split("").delete_if.with_index { |v,i| i <= opening or v == ")"}
 
 
 # loop do   
@@ -139,18 +152,31 @@ class Backpack
 
 # almost = cleaner[amount].split("").delete_if.with_index { |v,i| i >= @bracket or ((i >= @pipe_stop) and (i <= @pipe))}.index(" ") 
 
-# p cleaner[amount].split("").delete_if.with_index { |v,i| i >= @bracket or ((i >= @pipe_stop) and (i <= @pipe))}.insert(almost,"%207C").map { |x| x == " " ? '%20' : x }.join
+# # p cleaner[amount].split("").delete_if.with_index { |v,i| i >= @bracket or ((i >= @pipe_stop) and (i <= @pipe))}.insert(almost,"%207C").map { |x| x == " " ? '%20' : x }.join
 
 
 # # almost.split("").index("%20")  
 # # .map { |x| x == " " ? '%20' : x }.join
 
-# # holder.push(cleaner[amount].split("").delete_if.with_index { |v,i| i >= @bracket or ((i >= @pipe_stop) and (i <= @pipe))}.map { |x| x == " " ? '%20' : x }.join) 
+# holder.push(cleaner[amount].split("").delete_if.with_index { |v,i| i >= @bracket or ((i >= @pipe_stop) and (i <= @pipe))}.join) 
 # amount += 1 
 
 
 # end  
 
+# hi = "ak-47 | skin (bracket)" 
+
+# hi.split("").map.with_index do |v,i| 
+#     if v == "|"
+#     @pipe = i  
+#     @pipe_stop = i - 1
+#   elsif  v == "(" 
+#     @bracket = i - 1  
+#   end 
+# end    
+
+
+# hi.split("").delete_if.with_index { |v,i| (i <= @pipe and i >= @pipe_stop) or (i >= @bracket)}.join
 
 # p "hi"
 #  p holder

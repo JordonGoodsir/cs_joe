@@ -1,23 +1,35 @@
+<div class=inventory_page> 
+<div class="d-flex p-2 justify-content-center items_title"> 
+
+<h2>>Items<</h2>  
+</div>   
 <p id="notice"><%= notice %></p>
 
-<h1>Items</h1>  
 
+<% begin%>
 <% if Profile.find_by(user_id: current_user).generated != true %>
-
 <%= link_to "Generate Inventory", generate_path, method: "post"%> 
+<% end%>  
+<% rescue%> 
+<% redirect_to root_path%> 
 <% end%>
 
+
+
+
 <div class="container-fluid">
-  <div class="row row-cols-1 row-cols-sm-2 row-cols-md-5">
+  <div class="row row-cols-1 row-cols-sm-2 row-cols-md-6 justify-content-around">
 <% @current_user_skins.each do |v|%>  
-<span class="border">
-<div class="row justify-content-around m-3">
+
+<div class="row m-3 py-3 d-flex justify-content-center card"> 
 <%=Skin.find(v).name%>  
-<%= image_tag "http:\/\/cdn.steamcommunity.com\/economy\/image\/#{Skin.find(v).icon_url}", class:"img-fluid img-thumbnail item_background"%>
-Average Price: $<%=Skin.find(v).average_price%></li>  
- 
+<br> 
+<%= Skin.find(v).wear%> 
+<%= image_tag("http:\/\/cdn.steamcommunity.com\/economy\/image\/#{Skin.find(v).icon_url}", class:"img-fluid img-thumbnail item_background my-2 no_border",style: "box-shadow: -1px 0px 19px 0px ##{Skin.find(v).rarity_color.to_s};")%>
+Average Price: $<%=Skin.find(v).average_price%>  
+ <center><button class="sell w-25 mt-2"><%= link_to "Sell", new_listing_path(@current_profile v)%></button><center>
 </div> 
-</span> 
 <% end%>  
+</div> 
 </div> 
 </div>

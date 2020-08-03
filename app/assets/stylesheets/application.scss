@@ -12,13 +12,20 @@
  */ 
 
  @import "bootstrap";  
+ @import url('https://fonts.googleapis.com/css2?family=Stalinist+One&display=swap'); 
+ @import url('https://fonts.googleapis.com/css2?family=Chakra+Petch&display=swap');  
+ @import "mixins"; 
+ @import "navs/empty_nav";
  @import "profiles";  
- @import "items";
+ @import "items/inventory"; 
+ @import "devise/sign_in";
 
- * { 
+ * h2 { 
      margin: 0; 
      border: 0;
- }
+ } 
+
+ a { color: inherit; } 
    
 
  
