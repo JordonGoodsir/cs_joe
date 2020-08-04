@@ -25,10 +25,11 @@
 <%=Skin.find(v).name%>  
 <br> 
 <%= Skin.find(v).wear%> 
-<%= image_tag("http:\/\/cdn.steamcommunity.com\/economy\/image\/#{Skin.find(v).icon_url}", class:"img-fluid img-thumbnail item_background my-2 no_border",style: "box-shadow: -1px 0px 19px 0px ##{Skin.find(v).rarity_color.to_s};")%>
+<%= image_tag("http:\/\/cdn.steamcommunity.com\/economy\/image\/#{Skin.find(v).icon_url}", class:"img-fluid img-thumbnail item_background my-2 no_border",style: "box-shadow: -1px 0px 10px -1px ##{Skin.find(v).rarity_color.to_s};")%>
 Average Price: $<%=Skin.find(v).average_price%>  
- <center><button class="sell w-25 mt-2"><%= link_to "Sell", new_listing_path(@current_profile v)%></button><center>
+ <center><%= link_to "Sell", new_listing_path(@current_profile, v), class:"sell w-25 mt-2"%><center>
 </div> 
+
 <% end%>  
 </div> 
 </div> 

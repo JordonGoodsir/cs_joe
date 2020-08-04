@@ -15,7 +15,8 @@
  @import url('https://fonts.googleapis.com/css2?family=Stalinist+One&display=swap'); 
  @import url('https://fonts.googleapis.com/css2?family=Chakra+Petch&display=swap');  
  @import "mixins"; 
- @import "navs/empty_nav";
+ @import "navs/empty_nav"; 
+ @import "listings/sell";
  @import "profiles";  
  @import "items/inventory"; 
  @import "devise/sign_in";
@@ -25,7 +26,16 @@
      border: 0;
  } 
 
- a { color: inherit; } 
+ a {  
+    color: inherit;   
+    text-decoration: none;
+}  
+
+ .universal_background { 
+     background-color: $background_color; 
+     color: $text_color; 
+     font-family: $gun_font;
+ }
    
 
  

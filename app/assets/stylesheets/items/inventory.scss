@@ -2,9 +2,10 @@
  margin:0 
 } 
 
-.item_background { 
-    background-color: black;
-}  
+.item_background{ 
+    background-color: black; 
+}   
+
 
 .inventory_border { 
     border: 1px solid red;
@@ -19,18 +20,34 @@
 
 .inventory_page{ 
     height:100%; 
-    background-color: #292931; 
+    background-color: $background_color; 
     // background-color: #3F3F34;
     color: $text_color
 } 
 
 .card{ 
     background-color: $header_background_color; 
+    // make backgorund darker 
     border: 1px solid #4D4D40; 
     text-align: center;
     font-family: $gun_font;
 
 } 
+
+// .sell{ 
+//     display:flex;
+//     justify-content:center; 
+//     background-color: $header_background_color; 
+//     border: $highlight_color 1px solid;  
+//     transition: 0.5s; 
+//     color: white;
+// } 
+
+//  .sell:hover { 
+//     background-color: $highlight_color;  
+//     color: $header_background_color; 
+//     border-radius: 9%;
+// } 
 
 .sell{ 
     display:flex;
@@ -38,7 +55,8 @@
     background-color: $header_background_color; 
     border: $highlight_color 1px solid;  
     transition: 0.5s; 
-    color: white;
+    color: white; 
+    
 } 
 
  .sell:hover { 

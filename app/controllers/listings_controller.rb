@@ -1,5 +1,6 @@
 class ListingsController < ApplicationController
-  before_action :set_listing, only: [:show, :edit, :update, :destroy]
+  before_action :set_listing, only: [:show, :edit, :update, :destroy] 
+  before_action :profile_check
 
   # GET /listings
   # GET /listings.json
@@ -14,7 +15,8 @@ class ListingsController < ApplicationController
 
   # GET /listings/new
   def new
-    @listing = Listing.new
+    @listing = Listing.new  
+    @@url_info = params
   end
 
   # GET /listings/1/edit
@@ -24,16 +26,32 @@ class ListingsController < ApplicationController
   # POST /listings
   # POST /listings.json
   def create
-    @listing = Listing.new(listing_params)
+    
+    @listing = Listing.new do |v| 
+      v.skin_id = @@url_info["skin_id"] 
+      v.seller_id = @@url_info["profile_id"] 
+      v.selling_price = params["listing"]["selling_price"]
+    end    
 
     respond_to do |format|
-      if @listing.save
-        format.html { redirect_to @listing, notice: 'Listing was successfully created.' }
-        format.json { render :show, status: :created, location: @listing }
-      else
-        format.html { render :new }
-        format.json { render json: @listing.errors, status: :unprocessable_entity }
-      end
+      if @listing.save 
+        format.html { redirect_to inventory_path(@@url_info["profile_id"]), notice: 'Listing was successfully created.' }
+        format.json { render :index, status: :created, location: @@url_info["profile_id"] }
+      else     
+        @profile_id = @@url_info[:profile_id] 
+        @skin_id = @@url_info[:skin_id] 
+        p @profile_id 
+        p @skin_id 
+        # format.html { render :action => "new" , :profile_id => @profile_id, :skin_id => @skin_id}  
+        # render "new", :locals => {:profile_id => @profile_id, :skin_id => @skin_id} 
+        # render 'new', locals: { type: 'Monitor' }
+        # format.html {render "new"}
+        # format.html { redirect_to new_listing_path(@@url_info["profile_id"], @@url_info["skin_id"])} 
+        format.json { render json: @listing.errors, status: :unprocessable_entity } 
+        p"++++++++++++++++"
+        p @listing.errors.full_messages 
+        p"++++++++++++++++"
+      end 
     end
   end
 
@@ -69,6 +87,12 @@ class ListingsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def listing_params
-      params.require(:listing).permit(:selling_price, :buyer_id, :seller_id)
+      params.require(:listing).permit(:selling_price)
+    end 
+
+    def profile_check  
+      if current_user
+        @current_profile = Profile.find_by(user_id: current_user).id 
+      end  
     end
 end

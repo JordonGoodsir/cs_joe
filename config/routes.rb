@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   
 
   resources :listings, except: [:new] 
-  get "/listing/new/:profile_id/:skin_id", to: "listings#new", as: "new_listing"
+  get "/listing/new/:profile_id/:skin_id", to: "listings#new", as: "new_listing" 
 
   resources :profiles 
 
