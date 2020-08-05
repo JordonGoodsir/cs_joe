@@ -5,8 +5,8 @@ class ListingsController < ApplicationController
   # GET /listings
   # GET /listings.json
   def index
-    @listings = Listing.all
-  end
+    @listings = Listing.where(seller_id: @current_profile)  
+  end 
 
   # GET /listings/1
   # GET /listings/1.json
@@ -16,7 +16,7 @@ class ListingsController < ApplicationController
   # GET /listings/new
   def new
     @listing = Listing.new  
-    @@url_info = params
+    @@url_info = params 
   end
 
   # GET /listings/1/edit
@@ -34,23 +34,21 @@ class ListingsController < ApplicationController
     end    
 
     respond_to do |format|
-      if @listing.save 
+      if @listing.save  
+        Item.find_by(profile_id: @@url_info["profile_id"], skin_id: @@url_info["skin_id"]).delete
         format.html { redirect_to inventory_path(@@url_info["profile_id"]), notice: 'Listing was successfully created.' }
         format.json { render :index, status: :created, location: @@url_info["profile_id"] }
       else     
         @profile_id = @@url_info[:profile_id] 
         @skin_id = @@url_info[:skin_id] 
-        p @profile_id 
-        p @skin_id 
+        # p @profile_id 
+        # p @skin_id 
         # format.html { render :action => "new" , :profile_id => @profile_id, :skin_id => @skin_id}  
         # render "new", :locals => {:profile_id => @profile_id, :skin_id => @skin_id} 
-        # render 'new', locals: { type: 'Monitor' }
+        # render "new", params[profile_id: @profile_id, skin_id: @skin_id]
         # format.html {render "new"}
-        # format.html { redirect_to new_listing_path(@@url_info["profile_id"], @@url_info["skin_id"])} 
-        format.json { render json: @listing.errors, status: :unprocessable_entity } 
-        p"++++++++++++++++"
-        p @listing.errors.full_messages 
-        p"++++++++++++++++"
+        format.html { redirect_to new_listing_path(@@url_info["profile_id"], @@url_info["skin_id"]), notice: 'Price Too Low'}
+        format.json { render json: @listing.errors, status: :unprocessable_entity }
       end 
     end
   end
@@ -60,11 +58,14 @@ class ListingsController < ApplicationController
   def update
     respond_to do |format|
       if @listing.update(listing_params)
-        format.html { redirect_to @listing, notice: 'Listing was successfully updated.' }
+        format.html { redirect_to listings_path , notice: 'Listing was successfully updated.' }
         format.json { render :show, status: :ok, location: @listing }
       else
-        format.html { render :edit }
-        format.json { render json: @listing.errors, status: :unprocessable_entity }
+        format.html {redirect_to edit_listing_path(params[:id],Listing.find(params[:id]).seller_id,Listing.find(params[:id]).skin_id), notice: 'Price Too Low'}  
+  
+
+        # format.json { render json: @listing.errors, status: :unprocessable_entity } 
+        
       end
     end
   end

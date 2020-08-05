@@ -21,7 +21,7 @@ class ItemsController < ApplicationController
   ids.each do |v| 
   @current_user_skins.push(Item.find(v).skin_id)  
   end  
-  p params
+  
 
 
   end 

@@ -1,31 +1,53 @@
-<p id="notice"><%= notice %></p>
 
-<h1>Listings</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>Selling price</th>
-      <th>Buyer</th>
-      <th>Seller</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+  <%# <div class= "d-flex flex-column"> %>  
+  <%= render "partials/user_banner"%>
+  <p id="notice"><%= notice %></p>
+  <div class="container">  
 
-  <tbody>
-    <% @listings.each do |listing| %>
-      <tr>
-        <td><%= listing.selling_price %></td>
-        <td><%= listing.buyer_id %></td>
-        <td><%= listing.seller_id %></td>
-        <td><%= link_to 'Show', listing %></td>
-        <td><%= link_to 'Edit', edit_listing_path(listing) %></td>
-        <td><%= link_to 'Destroy', listing, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+  <% @listings.each do |listing| %>
+  <div class="row align-items-centerside_card">
+    <div class="col border"> 
+      <%= image_tag("http:\/\/cdn.steamcommunity.com\/economy\/image\/#{Skin.find(listing.skin_id).icon_url}", class:"img-fluid img-thumbnail item_background my-2 no_border w-50",style: "box-shadow: -1px 0px 10px -1px ##{Skin.find(listing.skin_id).rarity_color.to_s};")%>
+    </div>
+    <div class="col highlight_border"> 
+     
+     <div class="row row-cols-2 align-items-center">  
+      
+      <div class="col py-3">  
+      <p>Name:<p>  
+      <%= Skin.find(listing.skin_id).name%>
+      </div>  
+
+    <div class="col py-3">  
+    <p>Your Price:<p>
+       $<%= listing.selling_price %>
+    </div>  
+
+    <div class="col"> 
+    <p>Wear:<p>  
+      <%= Skin.find(listing.skin_id).wear%>  
+    </div>  
+
+    <div class="col">  
+      <p>Average Price:<p>
+        $<%= Skin.find(listing.skin_id).average_price%> 
+    </div>   
+
+    <div class="col py-3"> 
+      <%= link_to 'Edit', edit_listing_path(listing.id,listing.seller_id, listing.skin_id) %>
+    </div>  
+
+    <div class="col py-3"> 
+      <%= link_to 'Destroy', listing, method: :delete, data: { confirm: 'Are you sure?' } %>
+    </div>  
+
+    </div> 
+
+    </div>  
+
+  <% end %>
+</div>
 
 <br>
 
-<%= link_to 'New Listing', new_listing_path %>

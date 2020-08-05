@@ -4,10 +4,15 @@ Rails.application.routes.draw do
   post "/generate", to: "items#generate", as: "generate"
   
 
-  resources :listings, except: [:new] 
+  resources :listings, except: [:new,:edit] 
   get "/listing/new/:profile_id/:skin_id", to: "listings#new", as: "new_listing" 
+  get "/listing/edit/:id/:profile_id/:skin_id", to: "listings#edit", as: "edit_listing" 
+  
+  resources :market, only: [:index, :show]
 
-  resources :profiles 
+  resources :profiles  
+
+
 
   devise_for :users 
 
