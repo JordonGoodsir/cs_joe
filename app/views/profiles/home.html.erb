@@ -1,12 +1,63 @@
-<h1>home<h1> 
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+<div id="carouselExampleIndicators" class="carousel slide m-3" data-ride="carousel">
+  <ol class="carousel-indicators">
+    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+    <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+    <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+  </ol>
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+       <%= image_tag "carosel1", class:"d-block carosel_image", alt:"Gun Skin"%> 
+    </div>
+    <div class="carousel-item">
+       <%= image_tag "carosel2", class:"d-block carosel_image", alt:"Gun Skin"%> 
+    </div>
+    <div class="carousel-item">
+       <%= image_tag "carosel3", class:"d-block carosel_image", alt:"Gun Skin"%> 
+    </div>
+  </div>
+  <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="sr-only">Previous</span>
+  </a>
+  <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="sr-only">Next</span>
+  </a>
+</div> 
+
+<div class="container home_background"> 
+<div class="d-flex flex-column align-items-center">   
+
+<h1 class="header_underline p-2 ">CS:JOE</h1>   
+<h2>Csgo For The Average Joe</h2> 
+
+</div> 
+
+<div class="row row-col-2 p-3">  
+
+<div class="col home_col">  
+<h2 class="home_sub p-5">Benefit You</h2>
+<p>
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec tincidunt vel ligula a volutpat. Nunc pulvinar ex luctus odio tempus ullamcorper. Nullam scelerisque enim felis, a dictum nulla hendrerit non. Morbi enim massa, sollicitudin eu aliquam non, sagittis in tortor. Fusce turpis risus, molestie eu enim eu, malesuada mattis risus. Duis porta viverra ante in tempus. Morbi faucibus placerat feugiat.</p>
+</div> 
+
+<div class="col home_col">   
+
+<h2 class="home_sub p-5">How It Works?</h2>
+<p>
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec tincidunt vel ligula a volutpat. Nunc pulvinar ex luctus odio tempus ullamcorper. Nullam scelerisque enim felis, a dictum nulla hendrerit non. Morbi enim massa, sollicitudin eu aliquam non, sagittis in tortor. Fusce turpis risus, molestie eu enim eu, malesuada mattis risus.</p>
+
+</div>
+
+</div>
+
+</div>
 
 
+         
 
-<% if !user_signed_in?%>
-<%= link_to "Sign in", new_user_session_path %>   
-<% else%>
-<%= link_to "Sign out", destroy_user_session_path, method: :delete %> 
-<%= link_to "profile", profile_path(@current_profile)%>
-<%end%>  
-
+ 
 

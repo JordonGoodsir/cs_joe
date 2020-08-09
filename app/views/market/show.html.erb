@@ -22,9 +22,7 @@
     <h4 class="row_align mt-3">Sellers Price: $<%= Listing.find(params[:id]).selling_price%></h4>
   <p id="notice"><%= notice %></p>
  <center>
-  <div class="form-actions d-flex justify-content-center mt-3 sell w-25">
-   <%= link_to "Buy", root_path %>
-  </div> 
+    <%= link_to "Buy", transaction_path,class:"mt-3 sell w-25", method: :post%>
   <center>    
 
  

@@ -32,7 +32,8 @@ gem 'bootstrap', '~> 4.5.0'
 gem 'simple_form', '~> 5.0', '>= 5.0.2'  
 gem 'jquery-rails'  
 gem 'saintly', '~> 0.1.10'  
-gem 'httparty', '~> 0.18.1'
+gem 'httparty', '~> 0.18.1' 
+gem "stripe", "~> 5.23"
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -58,3 +59,4 @@ end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+

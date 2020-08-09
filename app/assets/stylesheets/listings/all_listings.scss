@@ -12,4 +12,10 @@ p {
 
 .highlight_border { 
     border: 1px solid $highlight_color
+} 
+
+#notice {  
+    display: flex; 
+    justify-content: center;
+    background-color: $header_background_color;
 }

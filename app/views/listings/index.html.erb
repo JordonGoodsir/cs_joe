@@ -2,52 +2,40 @@
 
   <%# <div class= "d-flex flex-column"> %>  
   <%= render "partials/user_banner"%>
-  <p id="notice"><%= notice %></p>
-  <div class="container">  
+  <p id="notice"><%= notice %></p>  
 
-  <% @listings.each do |listing| %>
-  <div class="row align-items-centerside_card">
-    <div class="col border"> 
-      <%= image_tag("http:\/\/cdn.steamcommunity.com\/economy\/image\/#{Skin.find(listing.skin_id).icon_url}", class:"img-fluid img-thumbnail item_background my-2 no_border w-50",style: "box-shadow: -1px 0px 10px -1px ##{Skin.find(listing.skin_id).rarity_color.to_s};")%>
-    </div>
-    <div class="col highlight_border"> 
-     
-     <div class="row row-cols-2 align-items-center">  
-      
-      <div class="col py-3">  
-      <p>Name:<p>  
-      <%= Skin.find(listing.skin_id).name%>
-      </div>  
 
-    <div class="col py-3">  
-    <p>Your Price:<p>
-       $<%= listing.selling_price %>
+<div class="container-fluid"> 
+
+<div class="jumbotron dash_jumbo m-1 mt-4">
+   <div class="d-flex align-items-start justify-content-center">
+  <h1 class="display-1 dash_header">Listings</h1>  
+  </div> 
+  </div>
+  <div class="row row-cols-6 justify-content-around">
+<% @listings.each do |v|%>  
+
+<div class="row m-3 py-3 d-flex justify-content-center card"> 
+<%=Skin.find(Listing.find(v.id).skin_id).name%>  
+<br> 
+<%= Skin.find(Listing.find(v.id).skin_id).wear%> 
+<%= image_tag("http:\/\/cdn.steamcommunity.com\/economy\/image\/#{Skin.find(Listing.find(v.id).skin_id).icon_url}", class:"img-fluid img-thumbnail item_background my-2 no_border",style: "box-shadow: -1px 0px 10px -1px ##{Skin.find(Listing.find(v.id).skin_id).rarity_color.to_s};")%>
+Average Price: $<%=Skin.find(Listing.find(v.id).skin_id).average_price%>  
+<br> 
+Your Price: $<%= v.selling_price %>   
+ <div class="row">
+ <div class="col "> 
+     <%= link_to 'Edit', edit_listing_path(v.id,v.seller_id, v.skin_id), class:"sell mt-2" %>
     </div>  
 
-    <div class="col"> 
-    <p>Wear:<p>  
-      <%= Skin.find(listing.skin_id).wear%>  
+    <div class="col "> 
+      <%= link_to 'Destroy', v, method: :delete, data: { confirm: 'Are you sure?' }, class:"sell mt-2" %>
     </div>  
-
-    <div class="col">  
-      <p>Average Price:<p>
-        $<%= Skin.find(listing.skin_id).average_price%> 
-    </div>   
-
-    <div class="col py-3"> 
-      <%= link_to 'Edit', edit_listing_path(listing.id,listing.seller_id, listing.skin_id) %>
-    </div>  
-
-    <div class="col py-3"> 
-      <%= link_to 'Destroy', listing, method: :delete, data: { confirm: 'Are you sure?' } %>
-    </div>  
-
     </div> 
 
-    </div>  
+</div> 
 
-  <% end %>
-</div>
-
-<br>
+<% end%>  
+</div> 
+ 
 

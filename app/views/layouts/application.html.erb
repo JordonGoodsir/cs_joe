@@ -10,7 +10,7 @@
   </head>
 
   <body class= universal_background>  
-  <% if params[:controller] == "profiles" or params[:controller] == "items" or params[:controller] == "listings" and params[:action] != "new"%>  
+  <% if params[:controller] == "market" or params[:controller] == "profiles" or params[:controller] == "items" or params[:controller] == "listings" and params[:action] != "new"%>  
   <%= render "partials/nav_bar"%>  
   <% else %> 
   <%= render "partials/nav_bar_login"%>

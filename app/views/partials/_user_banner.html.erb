@@ -7,9 +7,9 @@
   
   </div>
  
-  <div class="d-flex justify-content-end">  
+  <div class="d-flex justify-content-end add_funds_button">  
    <div class="d-flex align-items-center mx-2"><h4>$<%= Profile.find(@current_profile).wallet %><h4></div> 
-  <a class="btn btn-primary btn-lg" href="#" role="button">Add Funds</a>  
+    <%= link_to "Add Funds", add_funds_path, class:"sell align-items-center px-2"%> 
   
   </div>
 </div>  

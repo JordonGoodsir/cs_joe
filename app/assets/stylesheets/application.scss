@@ -16,10 +16,12 @@
  @import url('https://fonts.googleapis.com/css2?family=Chakra+Petch&display=swap');  
  @import "mixins";   
  @import "navs/dashboard_banner"; 
- @import "navs/empty_nav"; 
+ @import "navs/empty_nav";   
+ @import "profiles/home"; 
+ @import "profiles/details";
+ @import "payments/add_funds";
  @import "listings/all_listings";
- @import "listings/sell";
- @import "profiles";  
+ @import "listings/sell"; 
  @import "items/inventory"; 
  @import "devise/sign_in";
 

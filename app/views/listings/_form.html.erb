@@ -1,12 +1,7 @@
 
-
 <%= simple_form_for(@listing) do |f| %> 
   <%= f.error_notification %>
   <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
-
-<% if @listing.errors.full_messages %> 
-<%= p @listing.errors.full_messages %> 
-<%end%>
 <div class="container sell_card p-3 rounded"> 
 <div class="row_align pb-3">
 <h2>Sell</h2> 

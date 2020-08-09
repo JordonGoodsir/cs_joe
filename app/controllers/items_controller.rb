@@ -14,7 +14,7 @@ class ItemsController < ApplicationController
   #  Item.create(profile_id:@current_profile, skin_id: [*1..Skin.ids.last].sample) 
   #  end 
   ids =[] 
-  @current_user_skins=[]  
+  @current_user_skins=[] 
 
   ids.push(Item.where(profile_id: @current_profile).ids).flatten! 
   

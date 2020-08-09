@@ -36,17 +36,11 @@ class ListingsController < ApplicationController
     respond_to do |format|
       if @listing.save  
         Item.find_by(profile_id: @@url_info["profile_id"], skin_id: @@url_info["skin_id"]).delete
-        format.html { redirect_to inventory_path(@@url_info["profile_id"]), notice: 'Listing was successfully created.' }
+        format.html { redirect_to listings_path, notice: 'Listing was successfully created.' }
         format.json { render :index, status: :created, location: @@url_info["profile_id"] }
       else     
         @profile_id = @@url_info[:profile_id] 
         @skin_id = @@url_info[:skin_id] 
-        # p @profile_id 
-        # p @skin_id 
-        # format.html { render :action => "new" , :profile_id => @profile_id, :skin_id => @skin_id}  
-        # render "new", :locals => {:profile_id => @profile_id, :skin_id => @skin_id} 
-        # render "new", params[profile_id: @profile_id, skin_id: @skin_id]
-        # format.html {render "new"}
         format.html { redirect_to new_listing_path(@@url_info["profile_id"], @@url_info["skin_id"]), notice: 'Price Too Low'}
         format.json { render json: @listing.errors, status: :unprocessable_entity }
       end 
@@ -72,12 +66,13 @@ class ListingsController < ApplicationController
 
   # DELETE /listings/1
   # DELETE /listings/1.json
-  def destroy
+  def destroy 
+    Item.create(profile_id:@current_profile, skin_id: Listing.find(params[:id]).skin_id) 
     @listing.destroy
     respond_to do |format|
-      format.html { redirect_to listings_url, notice: 'Listing was successfully destroyed.' }
+      format.html { redirect_to listings_url, notice: 'Listing was successfully deleted, back in your inventory now :).' }
       format.json { head :no_content }
-    end
+    end 
   end
 
   private
