@@ -39,6 +39,11 @@
      background-color: $background_color; 
      color: $text_color; 
      font-family: $gun_font;
+ } 
+
+ #notice { 
+     color: $highlight_color;
+     font-size: 1.4rem;
  }
    
 

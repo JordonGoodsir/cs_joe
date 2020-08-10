@@ -1,0 +1,31 @@
+
+<div class= "d-flex vh-100 align-items-center justify-content-center">
+<div class="d-flex flex-column w-50 align-items-center background_payment"> 
+<h3 class=notice_color>Notice:</h3>
+<p> Clicking pay will redirect you to stripe for payment<p>
+<div class="d-flex p-1">
+<button class="sell m-2" datastripe="payment">Pay</button>    
+<%= link_to "Back", :back, class:"sell m-2 px-1" %>
+</div> 
+</div> 
+</div>
+
+
+<script src="https://js.stripe.com/v3/"></script>
+
+
+<script>   
+
+document
+    .querySelector("[datastripe='payment']")
+    .addEventListener("click", () => {
+      const stripe = Stripe(
+        "<%= Rails.application.credentials.dig(:stripe, :public_key) %>" 
+      ); 
+
+      stripe.redirectToCheckout({
+        sessionId: "<%= @session_id %>"
+      });
+    }); 
+
+</script>

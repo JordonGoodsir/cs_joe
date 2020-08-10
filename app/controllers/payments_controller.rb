@@ -31,93 +31,125 @@ class PaymentsController < ApplicationController
     
     end  
 
-    def add_funds_10    
+    def add_funds_payment   
       
-      session = Stripe::Checkout::Session.create(
-        payment_method_types: ['card'],
-        customer_email: current_user.email,
-        line_items: [{ 
-            name: "Add funds: $10",
-            amount: 10 * 100,
-            description: "add funds",
-            currency: 'aud',
-            quantity: 1,
-        }],
-        payment_intent_data: {
-            metadata: {
-                user_id: current_user.id,
-            }
-        },
-        success_url: "#{root_url}/#{@current_profile}/inventory",
-        cancel_url: "#{root_url}listings"
-    )
+    #   session = Stripe::Checkout::Session.create(
+    #     payment_method_types: ['card'],
+    #     customer_email: current_user.email,
+    #     line_items: [{ 
+    #         name: "Add funds: $10",
+    #         amount: 10 * 100,
+    #         description: "add funds",
+    #         currency: 'aud',
+    #         quantity: 1,
+    #     }],
+    #     payment_intent_data: {
+    #         metadata: {
+    #             user_id: current_user.id,
+    #         }
+    #     },
+    #     success_url: "#{root_url}/#{@current_profile}/inventory",
+    #     cancel_url: "#{root_url}listings"
+    # )
 
     # @session_id = session.id  
-    # Stripe.api_key = Rails.application.credentials.dig(:stripe, :secret_key) 
-    # p Stripe.api_key 
-    # redirect_to "https://checkout.stripe.com/pay/#{Stripe.api_key}"
 
+
+    end  
+
+    def add_funds_ten  
+
+        session = Stripe::Checkout::Session.create(
+            payment_method_types: ['card'],
+            customer_email: current_user.email,
+            line_items: [{ 
+                name: "$10",
+                amount: 10 * 100,
+                description: "add funds",
+                currency: 'aud',
+                quantity: 1,
+            }],
+            payment_intent_data: {
+                metadata: {
+                    user_id: current_user.id,
+                }
+            },
+            success_url: "#{root_url}/payments/success/10",
+            cancel_url: "#{root_url}listings"
+        )
     
-    require 'stripe'
-    Stripe.api_key = 'sk_test_51GnIHHG3uVO0eVbiZmreSVvxEV1xOjweaZhkCdQXD8KgZR6USXZZnZ41kpPz6BiQRBeuTYgrsu52hhuPO6iXWjBw00P4mjZre2'
+        @session_id = session.id 
+
+        # ren script file
+
+    end  
     
-    Stripe::Checkout::Session.retrieve( sessionId: 'cs_test_HQXBK7Jll7iMmZ9xXsVrky93189q0yZfF1yX2Us3NqK2Bpj30LOpqkPf',
-    )      
+    def add_funds_twenty  
+
+        session = Stripe::Checkout::Session.create(
+            payment_method_types: ['card'],
+            customer_email: current_user.email,
+            line_items: [{ 
+                name: "$20",
+                amount: 20 * 100,
+                description: "add funds",
+                currency: 'aud',
+                quantity: 1,
+            }],
+            payment_intent_data: {
+                metadata: {
+                    user_id: current_user.id,
+                }
+            },
+            success_url: "#{root_url}/payments/success/20",
+            cancel_url: "#{root_url}listings"
+        )
+    
+        @session_id = session.id 
+
+        # ren script file
+
+    end  
+
+    def add_funds_fifty 
+
+        session = Stripe::Checkout::Session.create(
+            payment_method_types: ['card'],
+            customer_email: current_user.email,
+            line_items: [{ 
+                name: "$50",
+                amount: 50 * 100,
+                description: "add funds",
+                currency: 'aud',
+                quantity: 1,
+            }],
+            payment_intent_data: {
+                metadata: {
+                    user_id: current_user.id,
+                }
+            },
+            success_url: "#{root_url}/payments/success/50",
+            cancel_url: "#{root_url}listings"
+        )
+    
+        @session_id = session.id  
     end 
 
-    def add_funds_25 
-      session = Stripe::Checkout::Session.create(
-        payment_method_types: ['card'],
-        customer_email: current_user.email,
-        line_items: [{ 
-            name: "Add funds: $25",
-            amount: 25 * 100,
-            description: "add funds",
-            currency: 'aud',
-            quantity: 1,
-        }],
-        payment_intent_data: {
-            metadata: {
-                user_id: current_user.id,
-            }
-        },
-        success_url: "#{root_url}/#{@current_profile}/inventory",
-        cancel_url: "#{root_url}listings"
-    )
+    def webhook  
+        p "+++++++++++++++++++++"
+        p params 
+        p "+++++++++++++++++++++"
 
-    @session_id = session.id  
-   
-    end 
-
-    def add_funds_50 
-      session = Stripe::Checkout::Session.create(
-        payment_method_types: ['card'],
-        customer_email: current_user.email,
-        line_items: [{ 
-            name: "Add funds: $50",
-            amount: 50 * 100,
-            description: "add funds",
-            currency: 'aud',
-            quantity: 1,
-        }],
-        payment_intent_data: {
-            metadata: {
-                user_id: current_user.id,
-            }
-        },
-        success_url: "#{root_url}/#{@current_profile}/inventory",
-        cancel_url: "#{root_url}listings"
-    )
-
-    @session_id = session.id  
-    
     end
 
-
-    def success  
-     respond_to do |format|  
-      format.html { redirect_to inventory_path(@current_profile), notice: 'Funds Added'} 
-     end
+    def success   
+        p "+++++++++++++++++++++"
+        p params[:amount]  
+        p "good"
+        p "+++++++++++++++++++++" 
+        profile = Profile.find(@current_profile) 
+        profile.update(wallet: profile.wallet + params[:amount].to_i)
+        redirect_to inventory_path(@current_profile), notice: 'Funds Added'  
 
     end
     

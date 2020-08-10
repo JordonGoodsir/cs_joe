@@ -17,9 +17,12 @@ Rails.application.routes.draw do
 
   # payments 
   get "/addfunds", to: "payments#add_funds", as: "add_funds" 
-  post "/addfunds10", to: "payments#add_funds_10", as: "ten" 
-  post "/addfunds25", to: "payments#add_funds_25", as: "twenty" 
-  post "/addfunds50", to: "payments#add_funds_50", as: "fifty"
+  post "/addfunds_payments", to: "payments#add_funds_payments", as: "payment"  
+  get  "/addfunds_payments_ten", to: "payments#add_funds_ten", as:"ten" 
+  get  "/addfunds_payments_twenty", to: "payments#add_funds_twenty", as:"twenty" 
+  get  "/addfunds_payments_fifty", to: "payments#add_funds_fifty", as:"fifty"
+  post '/payments/webhook', to: "payments#webhook" 
+  get '/payments/success/:amount', to: "payments#success", as:"success"
 
 
 

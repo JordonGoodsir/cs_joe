@@ -24,7 +24,15 @@
 .bullet { 
     margin: 0;
     padding: 0
+}  
+
+.background_payment { 
+    background: $header_background_color;
 } 
+
+.notice_color { 
+    color:$highlight_color
+}
 
 
 

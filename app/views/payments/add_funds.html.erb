@@ -24,32 +24,9 @@
 
 </div>   
 
-<%# <button datastripe="payment">Pay</button>  %>
-<%=button_to "pay", ten_path, method: :post, datastripe:"payment"%>
-
-
-<script src="https://js.stripe.com/v3/"></script>
-
-<script>
-  document
-    .querySelector("[datastripe='payment']")
-    .addEventListener("click", () => {
-      const stripe = Stripe(
-        "<%= Rails.application.credentials.dig(:stripe, :public_key) %>"
-      );
-
-      stripe.redirectToCheckout({
-        sessionId: "<%= @session_id %>"
-      });
-    });
-</script> 
-
-
-
-<%# post data from button to add funds 
-then if statment to process right payment %>
-
-
+<%= link_to "ten", ten_path%> 
+<%= link_to "twenty", twenty_path%> 
+<%= link_to "fifty", fifty_path%>
 
 </div>
 
