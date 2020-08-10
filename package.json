@@ -1,8 +1,5 @@
 {
   "name": "cs_joe", 
-  "scripts": {
-    "start": "node app.js"
-  },
   "private": true,
   "dependencies": {
     "@rails/actioncable": "^6.0.0",
