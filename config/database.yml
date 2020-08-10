@@ -86,6 +86,7 @@ test:
 #
 production:
   <<: *default
+  adapter: postgresql
   database: cs_joe_production
   username: cs_joe
   password: <%= ENV['CS_JOE_DATABASE_PASSWORD'] %>
