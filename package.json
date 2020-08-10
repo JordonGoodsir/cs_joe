@@ -1,5 +1,8 @@
 {
-  "name": "cs_joe",
+  "name": "cs_joe", 
+  "scripts": {
+    "start": "node index.js"
+ },
   "private": true,
   "dependencies": {
     "@rails/actioncable": "^6.0.0",
@@ -12,10 +15,7 @@
   "version": "0.1.0",
   "devDependencies": {
     "webpack-dev-server": "^3.11.0"
-  }, 
-  "scripts": {
-    "start": "node index.js"
- }
+  }
  
 } 
 
