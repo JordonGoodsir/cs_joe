@@ -1,0 +1,32 @@
+// Place all the styles related to the Listings controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: https://sass-lang.com/
+
+.new_listing_page { 
+    display: flex; 
+    align-items: center;  
+    background-color:blue; 
+
+}
+
+.row_align{  
+    text-align: center; 
+}  
+
+.row_align h2 { 
+    background-color: $highlight_color; 
+    color: black
+}
+
+.sell_card { 
+    background-color: $header_background-color; 
+    width: 30vw
+} 
+
+.listing_button { 
+    color: green
+} 
+
+.sell input { 
+    color: $text_color
+} 

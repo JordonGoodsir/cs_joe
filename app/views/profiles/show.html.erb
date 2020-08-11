@@ -1,0 +1,40 @@
+<p id="notice"><%= notice %></p> 
+
+<%= render "partials/user_banner"%>  
+<div class="jumbotron dash_jumbo m-1 mt-4">
+   <div class="d-flex align-items-start justify-content-center">
+  <h1 class="display-1 dash_header">Profile</h1>  
+  </div> 
+  </div>
+
+<div class ="container details_container"> 
+<div class="d-flex flex-column align-items-center">
+
+
+<div class= "row row-cols-2 mt-5"> 
+<div class="col"> 
+<h4>
+  <strong>Username:</strong>
+  <%= @profile.username %>
+</h4> 
+</div>
+
+<div class="col">
+<h4>
+  <strong>Number:</strong>
+  <%= @profile.number %>
+</h4>   
+</div>
+
+</div>
+
+<% if @profile.picture.attached? %>
+<%= image_tag @profile.picture, class: "p-3"%>  
+<% else%> 
+<p class="p-3">add picture through edit<p>
+<%end%>
+
+<%= link_to 'Edit', edit_profile_path(@profile),class:"sell px-1" %>  
+</div>
+</div>
+

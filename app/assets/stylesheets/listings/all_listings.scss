@@ -1,0 +1,21 @@
+.side_card { 
+    background-color: $header_background_color;
+} 
+
+.col{ 
+    text-align:center;
+} 
+
+p { 
+    margin: 0
+} 
+
+.highlight_border { 
+    border: 1px solid $highlight_color
+} 
+
+#notice {  
+    display: flex; 
+    justify-content: center;
+    background-color: $header_background_color;
+}

@@ -1,0 +1,25 @@
+
+.sign_page { 
+    width: 100vw; 
+    height: 93.2vh; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    background-image:url("orion.jpg"); 
+    background-size: cover; 
+}  
+
+.trim { 
+   border: 2px solid #ffc903; 
+   background-color: black;
+} 
+
+.signin_background { 
+    background-color: $header_background_color;
+} 
+
+.sign_page form { 
+    display:flex; 
+    flex-direction: column; 
+    align-items: center;
+}

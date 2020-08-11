@@ -1,0 +1,58 @@
+<p id="notice"><%= notice %></p>
+
+  <%# <div class= "d-flex flex-column"> %>  
+  
+  <div class="container-fluid">
+  <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 justify-content-center">
+    <% @listings.each do |listing| %>
+        
+        <div class= "row d-flex side_card "> 
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-2">
+        
+        <%= image_tag("http:\/\/cdn.steamcommunity.com\/economy\/image\/#{Skin.find(listing.skin_id).icon_url}", class:"img-fluid img-thumbnail item_background my-2 no_border w-50",style: "box-shadow: -1px 0px 10px -1px ##{Skin.find(listing.skin_id).rarity_color.to_s};")%>
+        
+        <div class="row"> 
+        
+        <div class="col border border-primary">  
+        <p>Your Price:<p>
+        $<%= listing.selling_price %> 
+        </div>   
+        
+        <div class="col border border-primary"> 
+        <%= Skin.find(listing.skin_id).wear%> 
+        </div>   
+
+        </div>
+        
+        <div class="row">  
+             
+        <div class="col border border-primary"> 
+         <p>Average Price:<p>
+        $<%= Skin.find(listing.skin_id).average_price%> 
+        </div> 
+        
+        <div class="col border border-primary">
+          <%= Skin.find(listing.skin_id).name%> 
+        </div>   
+
+        </div>
+
+        <div class="row">  
+
+        <div class="col border border-primary">  
+        <%= link_to 'Edit', edit_listing_path(listing) %>
+        </div> 
+
+        <div class="col border border-primary"> 
+        <%= link_to 'Destroy', listing, method: :delete, data: { confirm: 'Are you sure?' } %>
+        </div>  
+        
+        </div> 
+
+        </div> 
+        </div>
+    <% end %>
+  </div> 
+</div>
+
+<br>

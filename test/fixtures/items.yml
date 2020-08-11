@@ -1,0 +1,17 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  skin_name: MyString
+  market_price: 1
+  profile: one
+  listing: one
+  rarity: MyString
+  stat_track: false
+
+two:
+  skin_name: MyString
+  market_price: 1
+  profile: two
+  listing: two
+  rarity: MyString
+  stat_track: false

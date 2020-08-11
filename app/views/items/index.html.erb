@@ -1,0 +1,39 @@
+<div class=inventory_page>   
+<%= render "partials/user_banner"%>  
+<p id="notice"><%= notice %></p>
+<div class="jumbotron dash_jumbo m-1 mt-4">
+   <div class="d-flex align-items-start justify-content-center">
+  <h1 class="display-1 dash_header">Inventory</h1>  
+  </div> 
+  </div>
+
+
+
+<% begin%>
+<% if Profile.find_by(user_id: current_user).generated != true %>
+<%= link_to "Generate Inventory", generate_path, method: "post"%> 
+<% end%>  
+<% rescue%> 
+<% redirect_to root_path%> 
+<% end%>
+
+
+
+
+<div class="container-fluid">
+  <div class="row row-cols-1 row-cols-sm-2 row-cols-md-6 justify-content-around">
+<% @current_user_skins.reverse!.each do |v|%>  
+
+<div class="row m-3 py-3 d-flex justify-content-center card"> 
+<%=Skin.find(v).name%>  
+<br> 
+<%= Skin.find(v).wear%> 
+<%= image_tag("http:\/\/cdn.steamcommunity.com\/economy\/image\/#{Skin.find(v).icon_url}", class:"img-fluid img-thumbnail item_background my-2 no_border",style: "box-shadow: -1px 0px 10px -1px ##{Skin.find(v).rarity_color.to_s};")%>
+Average Price: $<%=Skin.find(v).average_price%>  
+ <center><%= link_to "Sell", new_listing_path(@current_profile, v), class:"sell w-25 mt-2"%><center>
+</div> 
+
+<% end%>  
+</div> 
+</div> 
+</div>

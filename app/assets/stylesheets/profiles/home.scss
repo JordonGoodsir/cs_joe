@@ -1,0 +1,28 @@
+// Place all the styles related to the Profiles controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: https://sass-lang.com/ 
+
+.carosel_image { 
+    height: 30vh;
+    width: 100vw; 
+    object-fit: cover;
+} 
+
+.header_underline {  
+    border-bottom: solid 1px $highlight_color;
+    font-family: $logo_font;
+    color: $highlight_color;
+} 
+
+.home_background { 
+    background-color: $header_background_color;
+} 
+
+.home_sub { 
+    color: $highlight_color;   
+} 
+
+.home_col { 
+    padding:3rem;
+    padding-top:0;
+}

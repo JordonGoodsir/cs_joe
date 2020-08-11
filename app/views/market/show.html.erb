@@ -1,0 +1,28 @@
+<div class="container sell_card p-3 rounded"> 
+<div class="row_align pb-3">
+<h2>Buy</h2> 
+</div>
+  <div class="row row_align justify-content-center"> 
+    <div class="col-sm">
+<h4><%=Skin.find(Listing.find(params[:id]).skin_id).name%></h4>
+</div>  
+<div class="col-sm">  
+<h4><%= Skin.find(Listing.find(params[:id]).skin_id).wear%></h4>  
+</div>    
+
+<div class="col-sm">  
+<h4><%= Skin.find(Listing.find(params[:id]).skin_id).rarity%></h4>  
+</div>
+ </div>  
+  
+  <div class= "d-flex justify-content-center">
+  <%= image_tag("http:\/\/cdn.steamcommunity.com\/economy\/image\/#{Skin.find(Listing.find(params[:id]).skin_id).icon_url}", class:"img-fluid img-thumbnail item_background no_border mt-3 w-75",style: "box-shadow: -1px 0px 19px 0px ##{Skin.find(Listing.find(params[:id]).skin_id).rarity_color};")%> 
+  </div> 
+    <h4 class="row_align mt-3">Average Price: $<%= Skin.find(Listing.find(params[:id]).skin_id).average_price%></h4>  
+    <h4 class="row_align mt-3">Sellers Price: $<%= Listing.find(params[:id]).selling_price%></h4>
+  <p id="notice"><%= notice %></p>
+ <center>
+    <%= link_to "Buy", transaction_path,class:"mt-3 sell w-25", method: :post%>
+  <center>    
+
+ 

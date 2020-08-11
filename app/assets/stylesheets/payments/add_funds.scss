@@ -1,0 +1,41 @@
+.funds_box { 
+    border:1px solid $highlight_color;
+    transition:1s all ease;
+    padding: 3rem;
+} 
+
+.funds_box:hover { 
+    background-color: $highlight_color; 
+    color: black;
+    transform: rotate(-45deg);
+} 
+
+.add_funds { 
+    background-color: $header_background_color;
+} 
+
+.funds_col { 
+    display: flex; 
+    flex-direction: column; 
+    justify-content: center; 
+    align-items: center;
+}   
+
+.bullet { 
+    margin: 0;
+    padding: 0
+}  
+
+.background_payment { 
+    background: $header_background_color;
+} 
+
+.notice_color { 
+    color:$highlight_color
+}
+
+
+
+// hover delay after shoot 
+// center bullet in middle of gun 
+// shoot out straight from there

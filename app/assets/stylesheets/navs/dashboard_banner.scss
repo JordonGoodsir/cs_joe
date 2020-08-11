@@ -1,0 +1,23 @@
+
+.dash_hover li a{ 
+    transition: 0.6s
+}
+
+.dash_hover li a:hover { 
+    color: $highlight_color
+} 
+
+.orange_bar { 
+    background-color: $highlight_color; 
+    height: 2vh;
+} 
+
+.dash_jumbo { 
+    background-color: $header_background_color; 
+    // color: $header_background_color
+} 
+
+.dash_header { 
+    border-color: $highlight_color; 
+    border-bottom: 2px solid $highlight_color;
+} 

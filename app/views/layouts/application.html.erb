@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>CsJoe</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body class= universal_background>  
+  <% if params[:controller] == "market" or params[:controller] == "profiles" or params[:controller] == "items" or params[:controller] == "listings" and params[:action] != "new"%>  
+  <%= render "partials/nav_bar"%>  
+  <% else %> 
+  <%= render "partials/nav_bar_login"%>
+  <% end%>   
+    <%= yield %> 
+
+  </body>
+</html>

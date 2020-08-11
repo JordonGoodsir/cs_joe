@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Selling price:</strong>
+  <%= @listing.selling_price %>
+</p>
+
+<p>
+  <strong>Buyer:</strong>
+  <%= @listing.buyer_id %>
+</p>
+
+<p>
+  <strong>Seller:</strong>
+  <%= @listing.seller_id %>
+</p>
+
+<%# <%= link_to 'Edit', edit_listing_path(@listing) %> | %>
+<%= link_to 'Back', listings_path %>

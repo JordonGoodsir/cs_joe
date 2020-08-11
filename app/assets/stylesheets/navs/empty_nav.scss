@@ -1,0 +1,31 @@
+.logo span { 
+    font-family: $logo-font; 
+    color: $highlight_color;
+} 
+
+.navbar { 
+    background-color: $header_background_color; 
+} 
+
+.navbar img { 
+    background-color: $highlight_color; 
+}  
+
+.navbar a { 
+    color: $text_color;
+}
+
+.center{ 
+    display: flex;  
+    align-items: center;  
+    border: 1px solid $highlight_color;
+}  
+
+.nav-item a { 
+    transition:0.4s
+} 
+
+.nav-item a:hover { 
+    color:$highlight_color
+}
+
