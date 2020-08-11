@@ -1,5 +1,3 @@
-hello
-
 <div class=inventory_page>   
 <%= render "partials/user_banner"%>  
 <p id="notice"><%= notice %></p>
@@ -13,7 +11,9 @@ hello
 
 <% begin%>
 <% if Profile.find_by(user_id: current_user).generated != true %>
-<%= link_to "Generate Inventory", generate_path, method: "post"%> 
+<div class="container">
+<%= link_to "Generate Inventory", generate_path, method: "post", class:"sell generate m-5"%>  
+</div>
 <% end%>  
 <% rescue%> 
 <% redirect_to root_path%> 

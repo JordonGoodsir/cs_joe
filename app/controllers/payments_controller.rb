@@ -4,55 +4,11 @@ class PaymentsController < ApplicationController
 
 
     def add_funds 
-      # p "+++++++++++++++" 
-      # p params   
-      # p @@amount
-      # p "+++++++++++++++" 
-    #   session = Stripe::Checkout::Session.create(
-    #     payment_method_types: ['card'],
-    #     customer_email: current_user.email,
-    #     line_items: [{ 
-    #         name: "$50",
-    #         amount: 50 * 100,
-    #         description: "add funds",
-    #         currency: 'aud',
-    #         quantity: 1,
-    #     }],
-    #     payment_intent_data: {
-    #         metadata: {
-    #             user_id: current_user.id,
-    #         }
-    #     },
-    #     success_url: "#{root_url}/#{@current_profile}/inventory",
-    #     cancel_url: "#{root_url}listings"
-    # )
 
-    # @session_id = session.id   
-    
+    p params
     end  
 
-    def add_funds_payment   
-      
-    #   session = Stripe::Checkout::Session.create(
-    #     payment_method_types: ['card'],
-    #     customer_email: current_user.email,
-    #     line_items: [{ 
-    #         name: "Add funds: $10",
-    #         amount: 10 * 100,
-    #         description: "add funds",
-    #         currency: 'aud',
-    #         quantity: 1,
-    #     }],
-    #     payment_intent_data: {
-    #         metadata: {
-    #             user_id: current_user.id,
-    #         }
-    #     },
-    #     success_url: "#{root_url}/#{@current_profile}/inventory",
-    #     cancel_url: "#{root_url}listings"
-    # )
-
-    # @session_id = session.id  
+    def add_funds_payment  
 
 
     end  
@@ -112,7 +68,7 @@ class PaymentsController < ApplicationController
     end  
 
     def add_funds_fifty 
-
+    
         session = Stripe::Checkout::Session.create(
             payment_method_types: ['card'],
             customer_email: current_user.email,
@@ -138,15 +94,12 @@ class PaymentsController < ApplicationController
     def webhook  
         p "+++++++++++++++++++++"
         p params 
-        p "+++++++++++++++++++++"
+        p "+++++++++++++++++++++" 
 
     end
 
-    def success   
-        p "+++++++++++++++++++++"
-        p params[:amount]  
-        p "good"
-        p "+++++++++++++++++++++" 
+    def success     
+        
         profile = Profile.find(@current_profile) 
         profile.update(wallet: profile.wallet + params[:amount].to_i)
         redirect_to inventory_path(@current_profile), notice: 'Funds Added'  

@@ -34,21 +34,6 @@
 
 } 
 
-// .sell{ 
-//     display:flex;
-//     justify-content:center; 
-//     background-color: $header_background_color; 
-//     border: $highlight_color 1px solid;  
-//     transition: 0.5s; 
-//     color: white;
-// } 
-
-//  .sell:hover { 
-//     background-color: $highlight_color;  
-//     color: $header_background_color; 
-//     border-radius: 9%;
-// } 
-
 .sell{ 
     display:flex;
     justify-content:center; 
@@ -69,4 +54,8 @@
     border: none; 
     border-radius: 0;
 
+} 
+
+.generate { 
+    font-size:2rem;
 }

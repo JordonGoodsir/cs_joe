@@ -1,37 +1,35 @@
-<div class="container w-50 add_funds"> 
+<div class="funds_page">
+<div class="container w-75 add_funds p-5 rounded"> 
 
-<div class="d-flex flex-column align-items center">  
+<div class="d-flex flex-column align-items-center">  
 
 <h1>Add Funds</h1> 
 
 
 <div class="row row-cols-5 justify-content-around">  
 
-<div class="col funds_box m-5 funds_col"> 
+<a href="/addfunds_payments_ten" class="col funds_box m-5 funds_col"> 
 <h5>$10</h5>   
-<%= image_tag("usps.png", width:"150", height:"40", class:"m-3")%>
-</div> 
+<%= image_tag("usps.png", width:"150", height:"40", class:"m-3")%><%= image_tag("bullet5.png", width:"10", height:"6.6", class:"bullet_image_usp bullet_usp")%>
+</a>
 
-<div class="col funds_box m-5 funds_col"> 
+<a href="/addfunds_payments_twenty" class="col funds_box m-5 funds_col"> 
 <h5>$25</h5>
-<div class="d-flex align-items-center"><%= image_tag("straight_ak.png", width:"150", height:"40", class:"m-3 ml-0")%><%= image_tag("bullet5.png", width:"10", height:"5", class:"bullet")%></div>
-</div> 
+<%= image_tag("straight_ak.png", width:"150", height:"40", class:"m-3 ml-0")%><%= image_tag("bullet5.png", width:"10", height:"6.6", class:"bullet_image_ak bullet_ak")%>
+</a>
+  
 
-
-<div class="col funds_box m-5 funds_col">  
+<a href="/addfunds_payments_fifty" class="col funds_box m-5 funds_col"> 
 <h5>$50</h5> 
-<%= image_tag("AWP.png", width:"150", height:"40", class:"m-3")%>   
+<%= image_tag("AWP.png", width:"150", height:"40", class:"m-3")%><%= image_tag("bullet5.png", width:"10", height:"6.6", class:"bullet_image_awp bullet_awp")%>   
+ </a>
+
+</div>
+
+</div>
 
 </div>   
-
-<%= link_to "ten", ten_path%> 
-<%= link_to "twenty", twenty_path%> 
-<%= link_to "fifty", fifty_path%>
-
-</div>
-
-</div>
-
 </div>  
+
 
 

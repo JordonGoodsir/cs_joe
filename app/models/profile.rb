@@ -13,9 +13,25 @@ validates :correct_document_type, presence: true
 
 validates :clean_name, presence: true  
 
-validates :not_blank, presence: true
+validates :not_blank, presence: true 
 
-private   
+validates :profile_size?, presence: true
+
+private    
+
+def profile_size? 
+
+  if username.chars.length > 11 
+    errors.add(:username, 'Input Too Long')  
+    return false   
+  elsif number.to_s.chars.length > 10 
+    errors.add(:number, 'Input Too Long')  
+    return false 
+  else 
+    return true
+  end
+
+end
 
 def not_blank 
   if username.blank?  

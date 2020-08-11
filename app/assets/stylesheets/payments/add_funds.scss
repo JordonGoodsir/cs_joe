@@ -1,17 +1,58 @@
 .funds_box { 
     border:1px solid $highlight_color;
-    transition:1s all ease;
+    transition:0.9s all ease;
     padding: 3rem;
-} 
+}  
+
+.bullet_image_usp { 
+    position: absolute;   
+    z-index: 2;  
+    top:49.3%; 
+    right:50%
+}   
+
+.bullet_image_ak { 
+    position: absolute;   
+    z-index: 2;  
+    top:50.7%; 
+    right:50%
+}   
+
+.bullet_image_awp { 
+    position: absolute;   
+    z-index: 2;  
+    top:53.6%; 
+    right:50%
+}  
 
 .funds_box:hover { 
     background-color: $highlight_color; 
     color: black;
-    transform: rotate(-45deg);
+    transform: rotate(-45deg); 
+
+}  
+
+.funds_box:hover > .bullet_usp {   
+    transition:1s all ease;
+    transform: translate(5vw,0) rotate(90deg);  
+    
 } 
 
+.funds_box:hover > .bullet_ak {   
+    transition:1s all ease;
+    transform: translate(5vw,0) rotate(90deg);  
+    
+} 
+
+.funds_box:hover > .bullet_awp {   
+    transition:1s all ease;
+    transform: translate(5vw,0) rotate(90deg);  
+    
+}
+
 .add_funds { 
-    background-color: $header_background_color;
+    background-color: $header_background_color; 
+    border:none;
 } 
 
 .funds_col { 
@@ -19,12 +60,8 @@
     flex-direction: column; 
     justify-content: center; 
     align-items: center;
-}   
+}    
 
-.bullet { 
-    margin: 0;
-    padding: 0
-}  
 
 .background_payment { 
     background: $header_background_color;
@@ -34,7 +71,13 @@
     color:$highlight_color
 }
 
-
+.funds_page { 
+    width: 100%;
+    height:93vh;
+    display: flex; 
+    justify-content: center; 
+    align-items: center;
+}
 
 // hover delay after shoot 
 // center bullet in middle of gun 

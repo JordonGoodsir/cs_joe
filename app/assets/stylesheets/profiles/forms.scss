@@ -1,0 +1,16 @@
+.forms_page { 
+    width: 100vw; 
+    height: 93.2vh; 
+    display: flex;  
+    justify-content: center; 
+    align-items: center;
+}
+
+
+.forms_background { 
+    background-color: $header_background_color;
+}  
+
+.forms_background h1 { 
+    color: $highlight_color
+}

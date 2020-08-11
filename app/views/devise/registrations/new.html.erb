@@ -1,7 +1,7 @@
 <div class=sign_page>
 <div class="container d-flex justify-content-center">
-<div class= "trim d-inline-flex flex-column p-2">
-<h2>Sign up</h2>
+<div class= "d-inline-flex flex-column p-5 signin_background align-items-center rounded">
+<h2 class="m-3 details">Sign up</h2>
 
 <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
   <%= f.error_notification %>
@@ -21,7 +21,7 @@
   </div>
 
   <div class="form-actions">
-    <%= f.button :submit, "Sign up" %>
+    <%= f.button :submit, "Sign up", class:"sell m-2 justify-content-center p-1" %>
   </div>
 <% end %>
 

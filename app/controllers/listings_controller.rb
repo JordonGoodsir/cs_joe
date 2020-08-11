@@ -41,7 +41,7 @@ class ListingsController < ApplicationController
       else     
         @profile_id = @@url_info[:profile_id] 
         @skin_id = @@url_info[:skin_id] 
-        format.html { redirect_to new_listing_path(@@url_info["profile_id"], @@url_info["skin_id"]), notice: 'Price Too Low'}
+        format.html { redirect_to new_listing_path(@@url_info["profile_id"], @@url_info["skin_id"]), notice: 'Invalid Price'}
         format.json { render json: @listing.errors, status: :unprocessable_entity }
       end 
     end
