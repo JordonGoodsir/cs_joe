@@ -9,6 +9,10 @@
 <div class="container-fluid">
   <div class="row row-cols-1 row-cols-sm-2 row-cols-md-6 justify-content-around">
 
+
+<%# accessing data in view becuase of loop making it faster as alternative is storing array of values in controller and passing them through %>
+<%# the loop is looking through each listing and finding skin data based off of the v.skin_id and then dot relevant information %>
+
 <% @random_listings.each do |v|%>  
 
 <%# if seller_id == profile_id dont show %> 

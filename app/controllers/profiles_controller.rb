@@ -3,7 +3,8 @@ class ProfilesController < ApplicationController
   before_action :only_user, only: [:show, :edit] 
   before_action :profile_check
   def home   
-    begin
+    begin 
+    # finding currents users profile and seeing if it exists
     if Profile.find_by(user_id: current_user.id) == nil 
       redirect_to new_profile_path
     end 
@@ -20,7 +21,9 @@ class ProfilesController < ApplicationController
   end
 
   # GET /profiles/new
-  def new
+  def new 
+    # starts the process of a new instance of profile whcih can them be saved
+
     @profile = Profile.new  
   end
 
@@ -31,7 +34,8 @@ class ProfilesController < ApplicationController
 
   # POST /profiles
   # POST /profiles.json
-  def create
+  def create 
+    # feeding the new instance of profile and giving it data through profile_params
     @profile = Profile.new(profile_params) 
     @profile.user_id = current_user.id 
     @profile.wallet = 0.00

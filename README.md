@@ -2,6 +2,14 @@
 
 
 
+### Links 
+
+- **Heroku** 
+  - https://secure-tor-23597.herokuapp.com/ 
+- **Github** 
+  - https://github.com/JordonGoodsir/cs_joe/tree/temp 
+    - all code is on the temp branch
+
 ### Problem we are trying to solve  
 
 - The problem Cs:Joe is trying to solve is the undereducation of sellers and buyers on the steam market.   

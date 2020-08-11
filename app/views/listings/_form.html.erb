@@ -3,7 +3,8 @@
   <%= f.error_notification %>
   <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
 <div class="container sell_card p-3 rounded"> 
-<div class="row_align pb-3">
+<div class="row_align pb-3"> 
+<%# finding the skin based off of the params id and then accessing thefield after the dot %>
 <h2>Sell</h2> 
 </div>
   <div class="row row_align justify-content-center"> 

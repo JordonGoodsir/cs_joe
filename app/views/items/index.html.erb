@@ -10,6 +10,7 @@
 
 
 <% begin%>
+<%# finding the current users profile and checking if the field generated is not true %>
 <% if Profile.find_by(user_id: current_user).generated != true %>
 <div class="container">
 <%= link_to "Generate Inventory", generate_path, method: "post", class:"sell generate m-5"%>  
@@ -25,7 +26,8 @@
 <div class="container-fluid">
   <div class="row row-cols-1 row-cols-sm-2 row-cols-md-6 justify-content-around">
 <% @current_user_skins.reverse!.each do |v|%>  
-
+<%# accessing data in view becuase of loop making it faster as alternative is storing array of values in controller and passing them through %>
+<%# finding skin based off the ids in the array and then accessing the relevant field after the dot %>
 <div class="row m-3 py-3 d-flex justify-content-center card"> 
 <%=Skin.find(v).name%>  
 <br> 

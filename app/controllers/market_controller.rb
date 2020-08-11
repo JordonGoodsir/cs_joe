@@ -1,7 +1,8 @@
 class MarketController < ApplicationController  
     before_action :profile_check
 
-    def index  
+    def index   
+      # showing all listings
         @random_listings = Listing.all 
     end 
 
@@ -12,14 +13,17 @@ class MarketController < ApplicationController
     end    
 
     def transaction 
+      # testing to see if the current users profile wallet has enough funds bassed off of the listing selling_price
       if Profile.find(@current_profile).wallet < Listing.find(params[:id]).selling_price  
         redirect_to root_path 
       else  
        
-        # deduct money from buyer (current user) 
+        # finding current users profile
+        # deduct money from buyer (current user)  
         buyer = Profile.find(@current_profile)  
         buyer.update(wallet: buyer.wallet - Listing.find(params[:id]).selling_price)
        
+        # finding the sellers profile
         # give money to seller   
         seller = Listing.find(params[:id]).seller.profile  
         seller.update(wallet: seller.wallet + Listing.find(params[:id]).selling_price) 

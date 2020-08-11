@@ -14,7 +14,8 @@
   </div>
   <div class="row row-cols-6 justify-content-around">
 <% @listings.each do |v|%>  
-
+<%# accessing data in view becuase of loop making it faster as alternative is storing array of values in controller and passing them through %>
+<%# finding the relevant data skin based off of the listing id %>
 <div class="row m-3 py-3 d-flex justify-content-center card"> 
 <%=Skin.find(Listing.find(v.id).skin_id).name%>  
 <br> 

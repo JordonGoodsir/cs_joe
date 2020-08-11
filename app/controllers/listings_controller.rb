@@ -4,7 +4,8 @@ class ListingsController < ApplicationController
 
   # GET /listings
   # GET /listings.json
-  def index
+  def index 
+    # finds all listings made based off of seller id
     @listings = Listing.where(seller_id: @current_profile)  
   end 
 
@@ -14,7 +15,8 @@ class ListingsController < ApplicationController
   end
 
   # GET /listings/new
-  def new
+  def new 
+    # starts the process of a new instance of listing whcih can them be saved
     @listing = Listing.new  
     @@url_info = params 
   end
@@ -26,7 +28,7 @@ class ListingsController < ApplicationController
   # POST /listings
   # POST /listings.json
   def create
-    
+    # assigning values to the listing
     @listing = Listing.new do |v| 
       v.skin_id = @@url_info["skin_id"] 
       v.seller_id = @@url_info["profile_id"] 
@@ -34,7 +36,8 @@ class ListingsController < ApplicationController
     end    
 
     respond_to do |format|
-      if @listing.save  
+      if @listing.save   
+        # finding an item based off properties fed to it
         Item.find_by(profile_id: @@url_info["profile_id"], skin_id: @@url_info["skin_id"]).delete
         format.html { redirect_to listings_path, notice: 'Listing was successfully created.' }
         format.json { render :index, status: :created, location: @@url_info["profile_id"] }
@@ -54,19 +57,18 @@ class ListingsController < ApplicationController
       if @listing.update(listing_params)
         format.html { redirect_to listings_path , notice: 'Listing was successfully updated.' }
         format.json { render :show, status: :ok, location: @listing }
-      else
+      else 
+        # redirecting with params found throught listing
         format.html {redirect_to edit_listing_path(params[:id],Listing.find(params[:id]).seller_id,Listing.find(params[:id]).skin_id), notice: 'Price Too Low'}  
-  
-
-        # format.json { render json: @listing.errors, status: :unprocessable_entity } 
-        
+          
       end
     end
   end
 
   # DELETE /listings/1
   # DELETE /listings/1.json
-  def destroy 
+  def destroy  
+    # creating an item based off of the pervious listing data
     Item.create(profile_id:@current_profile, skin_id: Listing.find(params[:id]).skin_id) 
     @listing.destroy
     respond_to do |format|

@@ -99,7 +99,7 @@ class PaymentsController < ApplicationController
     end
 
     def success     
-        
+        # finding current users profile
         profile = Profile.find(@current_profile) 
         profile.update(wallet: profile.wallet + params[:amount].to_i)
         redirect_to inventory_path(@current_profile), notice: 'Funds Added'  

@@ -14,11 +14,13 @@ class ItemsController < ApplicationController
   #  Item.create(profile_id:@current_profile, skin_id: [*1..Skin.ids.last].sample) 
   #  end 
   ids =[] 
-  @current_user_skins=[] 
+  @current_user_skins=[]  
 
+  # finds all of users item ids then pushes them to array
   ids.push(Item.where(profile_id: @current_profile).ids).flatten! 
   
-  ids.each do |v| 
+  ids.each do |v|  
+  # based off item ids in array it finds relvant skin ids and then pushes to another array
   @current_user_skins.push(Item.find(v).skin_id)  
   end  
   
@@ -27,11 +29,13 @@ class ItemsController < ApplicationController
   end 
 
   def generate   
-    begin
+    begin 
+    # finds the current users profile
     current = Profile.find(@current_profile) 
     current.generated = true 
     current.save
-    for i in 1..20  
+    for i in 1..20   
+    # creates 20 random items with users profile id (@current_profile) and 20 sampled skin ids
     Item.create(profile_id: @current_profile, skin_id: [*1..Skin.ids.last].sample) 
     end 
     redirect_to inventory_path(@current_profile) 
@@ -46,7 +50,8 @@ class ItemsController < ApplicationController
   end
 
   # GET /items/new
-  def new
+  def new 
+    # starts the process of a new instance of item whcih can them be saved
     @item = Item.new
   end
 
@@ -98,7 +103,7 @@ class ItemsController < ApplicationController
 
   private
     # Use callbacks to share common setup or constraints between actions.
-    def set_item
+    def set_item 
       @item = Item.find(params[:id])
     end
 
@@ -107,15 +112,10 @@ class ItemsController < ApplicationController
       params.require(:item).permit(:skin_name, :market_price, :profile_id, :listing_id, :rarity, :stat_track)
     end  
 
-    # def only_user_items  
-    #   if current_user.id != Profile.find(user_id: current_user.id).user_id
-    #     redirect_to root_path
-    #   end
-    # end 
-
-    
+  
     def profile_check  
-      if current_user
+      if current_user 
+        # finds the users profile based off of their user_id through current_user
         @current_profile = Profile.find_by(user_id: current_user).id 
       end  
     end

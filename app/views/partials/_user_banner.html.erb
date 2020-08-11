@@ -1,13 +1,16 @@
 <div class="jumbotron dash_jumbo">
-   <div class="d-flex align-items-start">
+   <div class="d-flex align-items-start"> 
+   <%# finding the current users profile and checking to see if a picture is attatched %>
    <%if Profile.find(@current_profile).picture.attached?%>
    <%= image_tag(Profile.find(@current_profile).picture, class:"img-thumbnail mr-5")%> 
-   <%end%>
+   <%end%>  
+   <%# finding the current users profile and displaying their username %>
   <h1 class="display-1 dash_header"><%= Profile.find(@current_profile).username %></h1>  
   
   </div>
  
   <div class="d-flex justify-content-end add_funds_button">  
+  <%# finding the current users profile, then finding their wallet  %>
    <div class="d-flex align-items-center mx-2"><h4>$<%= Profile.find(@current_profile).wallet %><h4></div> 
     <%= link_to "Add Funds", add_funds_path, class:"sell align-items-center px-2"%> 
   
