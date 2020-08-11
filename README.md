@@ -1,6 +1,10 @@
 # Cs:Joe
 
+### Dependency 
 
+- trying to run on local machine 
+  - commands to run 
+    - rails runner lib/backpack.rb
 
 ### Links 
 
