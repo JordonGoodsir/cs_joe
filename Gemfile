@@ -32,7 +32,7 @@ gem 'bootstrap', '~> 4.5.0'
 gem 'simple_form', '~> 5.0', '>= 5.0.2'  
 gem 'jquery-rails'  
 gem 'saintly', '~> 0.1.10'  
-gem 'httparty', '~> 0.18.1' 
+gem 'httparty', '~> 0.21.0' 
 gem "stripe", "~> 5.23"
 
 group :development, :test do
