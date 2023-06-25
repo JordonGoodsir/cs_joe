@@ -1,5 +1,5 @@
 {
-  "name": "cs_joe", 
+  "name": "cs_joe",
   "private": true,
   "dependencies": {
     "@rails/actioncable": "^6.0.0",
@@ -13,8 +13,4 @@
   "devDependencies": {
     "webpack-dev-server": "^3.11.0"
   }
- 
-} 
-
-
-
+}
