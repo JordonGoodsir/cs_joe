@@ -1,9 +1,5 @@
 # Cs:Joe
 
-### Link to Site 
-
-- https://secure-tor-23597.herokuapp.com/
-
 ### Problem we are trying to solve  
 
 - The problem Cs:Joe is trying to solve is the undereducation of sellers and buyers on the steam market.   
